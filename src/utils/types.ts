@@ -1,7 +1,7 @@
 export type WidgetData = {
   id: string;
-  type: string; // e.g., 'chart', 'table', 'summary', etc.
-  settings: Record<string, any>; // Settings specific to the widget type
+  type: "data" | "graph" | "summary";
+  settings: Record<string, any>;
 };
 
 export type ButtonProps = {
@@ -17,4 +17,19 @@ export type TabProps = {
   active: boolean;
   onClick: () => void;
   setActiveTab: (label: string) => void;
+};
+
+export type WidgetTypeSelectorComponentProps = {
+  title: string;
+  description: string;
+  widgetType: "data" | "graph" | "summary";
+};
+
+export type InputComponentProps = {
+  name: string;
+  className?: string;
+  value: string;
+  placeholder: string;
+  type: "text" | "password" | "email" | "number";
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
