@@ -5,13 +5,15 @@ import Dashboard from "./Dashboard";
 
 const Layout: React.FC = () => {
   return (
-    <React.Fragment>
-      <Sidebar />
-      <main>
-        <Header />
-        <Dashboard />
+    <>
+      <main className="flex h-screen">
+        <Sidebar />
+        <section className="">
+          <Header />
+          <Dashboard />
+        </section>
       </main>
-    </React.Fragment>
+    </>
   );
 };
 
