@@ -11,3 +11,10 @@ export type ButtonProps = {
   disabled?: boolean;
   onClick: () => void;
 };
+
+export type TabProps = {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+  setActiveTab: (label: string) => void;
+};
