@@ -1,7 +1,12 @@
 import React from "react";
 
 const Header: React.FC = () => {
-  return <>Header</>;
+  return (
+    <>
+      <section>left</section>
+      <section>right</section>
+    </>
+  );
 };
 
 export default Header;
