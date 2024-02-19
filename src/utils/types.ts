@@ -33,3 +33,17 @@ export type InputComponentProps = {
   type: "text" | "password" | "email" | "number";
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
+
+export type NaviconProps = {
+  children: React.ReactNode;
+  active: boolean;
+  className?: string;
+  onClick?: () => void;
+};
+
+export type HeadericonProps = {
+  children: React.ReactNode;
+  active: boolean;
+  className?: string;
+  onClick?: () => void;
+};
