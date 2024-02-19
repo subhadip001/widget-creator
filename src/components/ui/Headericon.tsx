@@ -5,7 +5,7 @@ const Headericon: React.FC<HeadericonProps> = ({
   children,
   active,
   className,
-  onClick,
+  //onClick,
 }) => {
   const navClass = active
     ? " rounded-md bg-brand_light cursor-pointer flex items-center justify-center"

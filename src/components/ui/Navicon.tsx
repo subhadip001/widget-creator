@@ -5,7 +5,7 @@ const Navicon: React.FC<NaviconProps> = ({
   children,
   active,
   className,
-  onClick,
+  //onClick,
 }) => {
   const navClass = active
     ? " p-4 rounded-md bg-brand_light cursor-pointer"
