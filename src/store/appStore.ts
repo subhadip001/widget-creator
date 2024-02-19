@@ -45,7 +45,7 @@ const useModalStateStore = create<
   )
 );
 
-export const useWidgetStore = create<WidgetStore>((set) => ({
+const useWidgetStore = create<WidgetStore>((set) => ({
   widgets: [],
   addWidget: (widget: any) =>
     set((state) => ({ widgets: [...state.widgets, widget] })),
@@ -55,7 +55,7 @@ export const useWidgetStore = create<WidgetStore>((set) => ({
     })),
 }));
 
-export { useTabStore, useModalStateStore };
+export { useTabStore, useModalStateStore, useWidgetStore };
 
 // export const useWidgetStore = create(
 //   persist(
