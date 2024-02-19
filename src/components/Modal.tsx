@@ -1,6 +1,5 @@
-// Modal.tsx
 import React from "react";
-import { WidgetData } from "../utils/types"; // Make sure to define this type according to your needs
+import { WidgetData } from "../utils/types";
 import { IoAdd } from "react-icons/io5";
 import InputComponent from "./ui/InputComponent";
 import navItem from "../assets/navItem.svg";
