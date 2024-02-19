@@ -3,11 +3,14 @@ import { FiHome } from "react-icons/fi";
 import Tab from "./ui/Tab";
 import Headericon from "./ui/Headericon";
 import { IoSettingsOutline, IoAdd } from "react-icons/io5";
-import { useTabStore } from "../store/appStore";
+import { useModalStateStore, useTabStore } from "../store/appStore";
 import Button from "./ui/Button";
 
 const Header: React.FC = () => {
   const activeTab: string = useTabStore((state) => state.activeTab);
+  const setModalState: (state: boolean) => void = useModalStateStore(
+    (state) => state.setModalState
+  );
   return (
     <div className="flex justify-between items-center py-4 px-4 md:px-8 border-b-2 border-gray_light">
       <section className="left flex gap-3 w-[60%] md:w-auto overflow-x-auto overflow-y-hidden md:overflow-x-visible">
@@ -20,6 +23,7 @@ const Header: React.FC = () => {
         <Tab label="settings" active={activeTab === "settings"} />
         <Button
           className=" border-border_brand text-brand bg-[#5e5adb10]"
+          type="button"
           onClick={() => {}}
         >
           <IoAdd className="text-3xl" />
@@ -29,7 +33,10 @@ const Header: React.FC = () => {
       <section className="right flex items-center gap-3 md:gap-6">
         <Button
           className=" border-border_brand h-[7vh] items-center text-brand bg-[#5e5adb10]"
-          onClick={() => {}}
+          type="button"
+          onClick={() => {
+            setModalState(true);
+          }}
         >
           <div className="flex items-center text-xl gap-2">
             <div>

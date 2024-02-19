@@ -2,8 +2,8 @@ import React from "react";
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="">
-      <h1>Dashboard</h1>
+    <div className="px-4 md:px-8 bg-brand_light">
+      <section className="h-[87vh]">Nothing</section>
     </div>
   );
 };

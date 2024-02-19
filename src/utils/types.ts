@@ -1,5 +1,6 @@
 export type WidgetData = {
   id: string;
+  name: string;
   type: "data" | "graph" | "summary";
   settings: Record<string, any>;
 };
