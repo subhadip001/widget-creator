@@ -20,19 +20,37 @@ const Header: React.FC = () => {
         <Tab
           label="Overview"
           active={activeTab === "overview"}
-          onClick={() => {}}
+          onClick={() => {
+            if (activeTab !== "overview") {
+              setActiveTab("overview");
+            } else {
+              setActiveTab("");
+            }
+          }}
           setActiveTab={() => {}}
         />
         <Tab
           label="Customers"
           active={activeTab === "customers"}
-          onClick={() => {}}
+          onClick={() => {
+            if (activeTab !== "customers") {
+              setActiveTab("customers");
+            } else {
+              setActiveTab("");
+            }
+          }}
           setActiveTab={() => {}}
         />
         <Tab
           label="Products"
           active={activeTab === "products"}
-          onClick={() => {}}
+          onClick={() => {
+            if (activeTab !== "products") {
+              setActiveTab("products");
+            } else {
+              setActiveTab("");
+            }
+          }}
           setActiveTab={() => {}}
         />
       </section>
