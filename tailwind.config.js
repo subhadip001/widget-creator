@@ -7,6 +7,8 @@ export default {
       brand: "#5E5ADB",
       brand_dark: "#111827",
       brand_light: "#F4F4FF",
+      border_brand: "#E0DFF8",
+      border_light: "#F3F2FC",
       gray_light: "#E4E4E7",
       gray_default: "#8D8D8D",
       gray_dark: "#393939E5",

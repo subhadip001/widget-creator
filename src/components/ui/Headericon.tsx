@@ -8,8 +8,8 @@ const Headericon: React.FC<HeadericonProps> = ({
   onClick,
 }) => {
   const navClass = active
-    ? " p-1 rounded-md bg-brand_light cursor-pointer"
-    : " p-1 rounded-md cursor-pointer hover:bg-brand_light hover:text-brand_dark";
+    ? " rounded-md bg-brand_light cursor-pointer flex items-center justify-center"
+    : " rounded-md cursor-pointer flex items-center justify-center";
   return <div className={className + navClass}>{children}</div>;
 };
 

@@ -15,8 +15,6 @@ export type ButtonProps = {
 export type TabProps = {
   label: string;
   active: boolean;
-  onClick: () => void;
-  setActiveTab: (label: string) => void;
 };
 
 export type WidgetTypeSelectorComponentProps = {

@@ -8,53 +8,18 @@ import { useTabStore } from "../store/appStore";
 
 const Header: React.FC = () => {
   const activeTab: string = useTabStore((state) => state.activeTab);
-  const setActiveTab: (tab: string) => void = useTabStore(
-    (state) => state.setActiveTab
-  );
   return (
-    <div className="flex justify-between items-center py-4 px-5">
-      <section className="left flex">
+    <div className="flex justify-between items-center py-4 px-5 border-b-2 border-gray_light">
+      <section className="left flex gap-3 w-[60%] md:w-auto overflow-x-auto overflow-y-hidden md:overflow-x-visible">
         <Headericon active={false} onClick={() => {}} className="active">
           <FiHome className="text-3xl text-gray_default" />
         </Headericon>
-        <Tab
-          label="Overview"
-          active={activeTab === "overview"}
-          onClick={() => {
-            if (activeTab !== "overview") {
-              setActiveTab("overview");
-            } else {
-              setActiveTab("");
-            }
-          }}
-          setActiveTab={() => {}}
-        />
-        <Tab
-          label="Customers"
-          active={activeTab === "customers"}
-          onClick={() => {
-            if (activeTab !== "customers") {
-              setActiveTab("customers");
-            } else {
-              setActiveTab("");
-            }
-          }}
-          setActiveTab={() => {}}
-        />
-        <Tab
-          label="Products"
-          active={activeTab === "products"}
-          onClick={() => {
-            if (activeTab !== "products") {
-              setActiveTab("products");
-            } else {
-              setActiveTab("");
-            }
-          }}
-          setActiveTab={() => {}}
-        />
+        <Tab label="overview" active={activeTab === "overview"} />
+        <Tab label="customers" active={activeTab === "customers"} />
+        <Tab label="products" active={activeTab === "products"} />
+        <Tab label="settings" active={activeTab === "settings"} />
       </section>
-      <section className="right flex">
+      <section className="right flex items-center gap-3">
         <Headericon active={false} onClick={() => {}} className="active">
           <IoMdAdd className="text-3xl text-gray_default" />
         </Headericon>

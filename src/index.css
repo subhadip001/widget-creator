@@ -10,9 +10,22 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-* , *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
 }
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 0px;
+  display: none;
+}
+
+/* :hover::-webkit-scrollbar-thumb {
+  background-color: #8D8D8D;
+  border-radius: 8px;
+} */

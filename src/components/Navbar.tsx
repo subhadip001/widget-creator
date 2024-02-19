@@ -18,6 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
           src={logo}
           className="h-full w-full object-cover rounded-2xl"
           alt="crux_logo"
+          draggable={false}
         />
       </div>
       <nav className="flex w-[80%] md:w-auto md:flex-col items-center justify-between md:gap-5">
