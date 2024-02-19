@@ -1,8 +1,10 @@
 export type WidgetData = {
   id: string;
   name: string;
+  bgColor: string;
+  dimension: string;
   type: "data" | "graph" | "summary";
-  settings: Record<string, any>;
+  data: object;
 };
 
 export type ButtonProps = {

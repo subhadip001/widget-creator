@@ -4,19 +4,10 @@ import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
 import { useModalStateStore } from "../store/appStore";
 import Modal from "./Modal";
-import { WidgetData } from "../utils/types";
 
 const Layout: React.FC = () => {
   const modalState = useModalStateStore((state) => state.modalState);
   const setModalState = useModalStateStore((state) => state.setModalState);
-
-  const handleSaveWidget = (widgetData: WidgetData) => {
-    // Logic to save the widget data goes here
-    // ...
-
-    // Close the modal after saving
-    setModalState(false);
-  };
 
   return (
     <>
@@ -31,7 +22,6 @@ const Layout: React.FC = () => {
           <Modal
             isOpen={modalState}
             onClose={() => setModalState(false)}
-            onSave={handleSaveWidget}
           />
         )}
       </main>

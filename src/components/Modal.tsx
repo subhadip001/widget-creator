@@ -4,25 +4,33 @@ import { IoAdd } from "react-icons/io5";
 import InputComponent from "./ui/InputComponent";
 import navItem from "../assets/navItem.svg";
 import Button from "./ui/Button";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (widgetData: WidgetData) => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
+
+  const { widgets, saveWidgets } = useLocalStorage();
 
   const handleSave = () => {
     const newWidget: WidgetData = {
       id: Date.now().toString(),
       name: "New Widget",
+      bgColor: "#ffffff",
+      dimension: "1x1",
       type: "data",
-      settings: {},
+      data: {},
     };
-    onSave(newWidget);
+    saveWidgets([...widgets, newWidget]);
   };
+
+  const viewWidgets = () => {
+    console.log(widgets);
+  }
 
   return (
     <>
@@ -88,7 +96,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave }) => {
                   <Button
                     className="w-full text-gray_dark"
                     type="button"
-                    onClick={() => {}}
+                    onClick={() => {viewWidgets()}}
                   >
                     Re
                   </Button>

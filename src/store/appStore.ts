@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { WidgetData } from "../utils/types";
 
 interface TabStore {
   activeTab: string;
@@ -10,12 +9,6 @@ interface TabStore {
 interface ModalStateStore {
   modalState: boolean;
   setModalState: (state: boolean) => void;
-}
-
-interface WidgetStore {
-  widgets: WidgetData[];
-  addWidget: (widget: WidgetData) => void;
-  removeWidget: (id: string) => void;
 }
 
 const useTabStore = create<TabStore, [["zustand/persist", TabStore]]>(
@@ -45,14 +38,5 @@ const useModalStateStore = create<
   )
 );
 
-const useWidgetStore = create<WidgetStore>((set) => ({
-  widgets: [],
-  addWidget: (widget: any) =>
-    set((state) => ({ widgets: [...state.widgets, widget] })),
-  removeWidget: (id: string) =>
-    set((state) => ({
-      widgets: state.widgets.filter((widget: any) => widget.id !== id),
-    })),
-}));
 
-export { useTabStore, useModalStateStore, useWidgetStore };
+export { useTabStore, useModalStateStore };
