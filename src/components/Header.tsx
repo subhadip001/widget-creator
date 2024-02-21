@@ -12,7 +12,7 @@ const Header: React.FC = () => {
     (state) => state.setModalState
   );
   return (
-    <div className="flex justify-between items-center h-[9vh] px-4 md:px-8 border-b-2 border-gray_light">
+    <div className="flex bg-[#ffff] justify-between items-center h-[9vh] px-4 md:px-8 border-b-2 border-gray_light">
       <section className="left flex gap-3 w-[60%] md:w-auto overflow-x-auto overflow-y-hidden md:overflow-x-visible">
         <div className="flex items-center">
           <FiHome className="text-xl text-gray_default" />
