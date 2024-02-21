@@ -1,9 +1,13 @@
 export type WidgetData = {
   id: string;
   name: string;
+  category: string;
   bgColor: string;
   dimension: string;
+  title: string;
+  description?: string;
   type: "data" | "graph" | "summary";
+  subType?: "bar" | "line" | "pie";
   data: object;
 };
 
@@ -24,6 +28,7 @@ export type WidgetTypeSelectorComponentProps = {
   title: string;
   description: string;
   widgetType: "data" | "graph" | "summary";
+  widgetSubType?: "bar" | "line" | "pie";
 };
 
 export type InputComponentProps = {

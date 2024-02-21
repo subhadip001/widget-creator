@@ -5,6 +5,8 @@ import InputComponent from "./ui/InputComponent";
 import navItem from "../assets/navItem.svg";
 import Button from "./ui/Button";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import WidgetTypeSelectorComponent from "./ui/WidgetTypeSelectorComponent";
+import { sampleTableData } from "../store/sampleData";
 
 interface ModalProps {
   isOpen: boolean;
@@ -20,17 +22,20 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     const newWidget: WidgetData = {
       id: Date.now().toString(),
       name: "New Widget",
+      category: "customers",
       bgColor: "#ffffff",
       dimension: "1x1",
+      title: "Data Widget",
+      description: "Random",
       type: "data",
-      data: {},
+      data: sampleTableData,
     };
     saveWidgets([...widgets, newWidget]);
   };
 
   const viewWidgets = () => {
     console.log(widgets);
-  }
+  };
 
   return (
     <>
@@ -80,10 +85,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               </div>
               <div className="components md:w-[40%]">
                 <span>Components</span>
-                <div>
-                  <span>Data</span>
-                  <p>Random</p>
-                </div>
+                <WidgetTypeSelectorComponent
+                  title="Data"
+                  description="random"
+                  widgetType="data"
+                />
                 <div>
                   <span>Data</span>
                   <p>Random</p>
@@ -96,7 +102,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                   <Button
                     className="w-full text-gray_dark"
                     type="button"
-                    onClick={() => {viewWidgets()}}
+                    onClick={() => {
+                      viewWidgets();
+                    }}
                   >
                     Re
                   </Button>

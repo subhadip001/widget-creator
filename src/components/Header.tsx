@@ -12,11 +12,11 @@ const Header: React.FC = () => {
     (state) => state.setModalState
   );
   return (
-    <div className="flex justify-between items-center py-4 px-4 md:px-8 border-b-2 border-gray_light">
+    <div className="flex justify-between items-center h-[9vh] px-4 md:px-8 border-b-2 border-gray_light">
       <section className="left flex gap-3 w-[60%] md:w-auto overflow-x-auto overflow-y-hidden md:overflow-x-visible">
-        <Headericon active={false} onClick={() => {}} className="active">
-          <FiHome className="text-3xl text-gray_default" />
-        </Headericon>
+        <div className="flex items-center">
+          <FiHome className="text-xl text-gray_default" />
+        </div>
         <Tab label="overview" active={activeTab === "overview"} />
         <Tab label="customers" active={activeTab === "customers"} />
         <Tab label="products" active={activeTab === "products"} />
@@ -26,31 +26,27 @@ const Header: React.FC = () => {
           type="button"
           onClick={() => {}}
         >
-          <IoAdd className="text-3xl" />
+          <IoAdd className="text-xl" />
         </Button>
       </section>
 
       <section className="right flex items-center gap-3 md:gap-6">
         <Button
-          className=" border-border_brand h-[7vh] items-center text-brand bg-[#5e5adb10]"
+          className=" border-border_brand h-[40px] items-center text-brand bg-[#5e5adb10]"
           type="button"
           onClick={() => {
             setModalState(true);
           }}
         >
-          <div className="flex items-center text-xl gap-2">
+          <div className="flex items-center text-sm gap-2">
             <div>
               <IoAdd className="text-2xl" />
             </div>
             <span className="hidden md:block font-medium">Add Widget</span>
           </div>
         </Button>
-        <Headericon
-          active={false}
-          onClick={() => {}}
-          className="active h-[7vh]"
-        >
-          <IoSettingsOutline className="text-3xl text-gray_default" />
+        <Headericon active={false} onClick={() => {}} className="active">
+          <IoSettingsOutline className="text-2xl text-gray_default" />
         </Headericon>
       </section>
     </div>
