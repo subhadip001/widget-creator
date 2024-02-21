@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-
-// Define the structure of the data that the component expects
-interface TableData {
-  timeFilter: string[];
-  columns: { id: string; label: string }[];
-  rows: { [key: string]: string }[];
-}
+import { TableData } from '../../utils/types';
 
 interface DataWidgetProps {
   data: TableData;

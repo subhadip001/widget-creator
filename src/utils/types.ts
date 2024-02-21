@@ -1,3 +1,68 @@
+export type TableData = {
+  timeFilter: string[];
+  columns: { id: string; label: string }[];
+  rows: { [key: string]: string }[];
+};
+
+export type BarGraphData = {
+  timeFilterOptions: string[];
+  selectedTimeFilter: string;
+  data: {
+    labels: string[];
+    datasets: {
+      label: string;
+      data: number[];
+      backgroundColor: string;
+    }[];
+  };
+};
+
+export type LineGraphData = {
+  timeFilterOptions: string[];
+  selectedTimeFilter: string;
+  data: {
+    labels: string[];
+    datasets: {
+      label: string;
+      data: number[];
+      borderColor: string;
+      fill: boolean;
+    }[];
+  };
+};
+
+export type PieGraphData = {
+  timeFilterOptions: string[];
+  selectedTimeFilter: string;
+  totalOrders: number;
+  orderCategories: OrderCategory[];
+};
+
+type OrderCategory = {
+  category: string;
+  count: number;
+  color: string;
+};
+
+export type GraphData = BarGraphData | LineGraphData | PieGraphData;
+
+type AnalysisData = {
+  mostEffectiveHour: EffectiveHourData;
+  nextBestHours: EffectiveHourData[];
+};
+
+type EffectiveHourData = {
+  hour: string;
+  meridiem: "AM" | "PM";
+  emailsOpened: number;
+};
+
+export type SummaryData = {
+  timePeriod: string;
+  analysis: AnalysisData;
+  summaryText: string;
+};
+
 export type WidgetData = {
   id: string;
   name: string;
@@ -7,8 +72,8 @@ export type WidgetData = {
   title: string;
   description?: string;
   type: "data" | "graph" | "summary";
-  subType?: "bar" | "line" | "pie";
-  data: object;
+  subType?: "bar" | "line" | "pie" | undefined;
+  data: TableData | GraphData | SummaryData;
 };
 
 export type ButtonProps = {
@@ -28,7 +93,7 @@ export type WidgetTypeSelectorComponentProps = {
   title: string;
   description: string;
   widgetType: "data" | "graph" | "summary";
-  widgetSubType?: "bar" | "line" | "pie";
+  widgetSubType?: "bar" | "line" | "pie" | undefined;
 };
 
 export type InputComponentProps = {

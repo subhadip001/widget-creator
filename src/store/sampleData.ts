@@ -1,4 +1,6 @@
-export const sampleTableData = {
+import { SummaryData, TableData } from "../utils/types";
+
+export const sampleTableData: TableData = {
   timeFilter: ["7d", "14d", "30d"],
   columns: [
     { id: "product", label: "PRODUCT" },
@@ -16,4 +18,55 @@ export const sampleTableData = {
 
 export const sampleGraphData = {};
 
-export const sampleSummaryData = {};
+export const samplePieGraphData = {
+  timeFilterOptions: ["7d", "14d", "30d"],
+  selectedTimeFilter: "7d",
+  totalOrders: 89000,
+  orderCategories: [
+    {
+      category: "Processed",
+      count: 30000,
+      color: "green",
+    },
+    {
+      category: "Shipped",
+      count: 25000,
+      color: "red",
+    },
+    {
+      category: "Returned",
+      count: 15000,
+      color: "yellow",
+    },
+    {
+      category: "Cancelled",
+      count: 19000,
+      color: "blue",
+    },
+  ],
+};
+
+export const sampleSummaryData: SummaryData = {
+  timePeriod: "Today",
+  analysis: {
+    mostEffectiveHour: {
+      hour: "15:00",
+      meridiem: "PM",
+      emailsOpened: 5041,
+    },
+    nextBestHours: [
+      {
+        hour: "16:00",
+        meridiem: "PM",
+        emailsOpened: 5007,
+      },
+      {
+        hour: "17:00",
+        meridiem: "PM",
+        emailsOpened: 4785,
+      },
+    ],
+  },
+  summaryText:
+    "Based on the provided data, the most effective hour of the day to send an email across all stores for all time, with the highest engagement after opening, is at 15:00(3 PM), with a total of 5041 emails opened. The next best hours are 16:00 (4 PM) and 17:00 (5 PM) with 5007 and 4785 emails opened respectively. There is a noticeable drop in",
+};

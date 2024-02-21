@@ -6,7 +6,11 @@ import navItem from "../assets/navItem.svg";
 import Button from "./ui/Button";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import WidgetTypeSelectorComponent from "./ui/WidgetTypeSelectorComponent";
-import { sampleTableData } from "../store/sampleData";
+import {
+  samplePieGraphData,
+  sampleSummaryData,
+  sampleTableData,
+} from "../store/sampleData";
 
 interface ModalProps {
   isOpen: boolean;
@@ -18,17 +22,27 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 
   const { widgets, saveWidgets } = useLocalStorage();
 
-  const handleSave = () => {
+  const handleSave = (
+    name: string,
+    category: string,
+    bgColor: string,
+    dimension: string,
+    title: string,
+    description: string,
+    type: "data" | "graph" | "summary",
+    subType?: "bar" | "line" | "pie"
+  ) => {
     const newWidget: WidgetData = {
       id: Date.now().toString(),
-      name: "New Widget",
-      category: "customers",
-      bgColor: "#ffffff",
-      dimension: "1x1",
-      title: "Data Widget",
-      description: "Random",
-      type: "data",
-      data: sampleTableData,
+      name,
+      category,
+      bgColor,
+      dimension,
+      title,
+      description,
+      type,
+      data: samplePieGraphData,
+      subType,
     };
     saveWidgets([...widgets, newWidget]);
   };
@@ -118,7 +132,18 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                   <Button
                     className="w-full bg-brand text-white"
                     type="button"
-                    onClick={handleSave}
+                    onClick={() => {
+                      handleSave(
+                        "name",
+                        "customer",
+                        "#fffff",
+                        "1x1",
+                        "title",
+                        "random",
+                        "graph",
+                        "pie"
+                      );
+                    }}
                   >
                     Save
                   </Button>
