@@ -15,7 +15,7 @@ interface LineGraphWidgetProps {
 }
 
 interface GraphWidgetProps {
-  subType: "bar" | "line" | "pie" | undefined;
+  subType?: "bar" | "line" | "pie" | undefined;
   data: BarGraphData | LineGraphData | PieGraphData;
 }
 

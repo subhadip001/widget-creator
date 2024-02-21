@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { sampleTableData } from "./sampleData";
+import { WidgetData } from "../utils/types";
 
 interface TabStore {
   activeTab: string;
@@ -9,6 +11,11 @@ interface TabStore {
 interface ModalStateStore {
   modalState: boolean;
   setModalState: (state: boolean) => void;
+}
+
+interface NewWidgetStore {
+  newWidget: object;
+  setNewWidget: (widget: object) => void;
 }
 
 const useTabStore = create<TabStore, [["zustand/persist", TabStore]]>(
@@ -38,5 +45,34 @@ const useModalStateStore = create<
   )
 );
 
+/* const [newWidget, setNewWidget] = useState<WidgetData>({
+    id: "",
+    name: "",
+    category: "",
+    bgColor: "",
+    dimension: "",
+    title: "",
+    description: "",
+    type: "data",
+    data: sampleTableData,
+  });
 
-export { useTabStore, useModalStateStore };
+  create a useCreateNewWidget using above data
+  */
+
+const useNewWidget = create<NewWidgetStore>((set) => ({
+  newWidget: {
+    id: "",
+    name: "",
+    category: "",
+    bgColor: "",
+    dimension: "",
+    title: "",
+    description: "",
+    type: "data",
+    data: sampleTableData,
+  },
+  setNewWidget: (widget: object) => set(() => ({ newWidget: widget })),
+}));
+
+export { useTabStore, useModalStateStore, useNewWidget };

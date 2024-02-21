@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { WidgetData } from "../utils/types";
 import { IoAdd } from "react-icons/io5";
 import InputComponent from "./ui/InputComponent";
@@ -98,19 +98,25 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                 </div>
               </div>
               <div className="components md:w-[40%]">
-                <span>Components</span>
-                <WidgetTypeSelectorComponent
-                  title="Data"
-                  description="random"
-                  widgetType="data"
-                />
-                <div>
-                  <span>Data</span>
-                  <p>Random</p>
-                </div>
-                <div>
-                  <span>Data</span>
-                  <p>Random</p>
+                <span className="px-2 text-[#2b2b2b55] text-[13px] font-medium">
+                  COMPONENTS
+                </span>
+                <div className="flex flex-col gap-2">
+                  <WidgetTypeSelectorComponent
+                    title="Data"
+                    description="Random Description"
+                    widgetType="data"
+                  />
+                  <WidgetTypeSelectorComponent
+                    title="Data"
+                    description="Random Description"
+                    widgetType="graph"
+                  />
+                  <WidgetTypeSelectorComponent
+                    title="Data"
+                    description="Random Description"
+                    widgetType="summary"
+                  />
                 </div>
                 <div className="btn-group flex flex-col md:flex-row">
                   <Button
