@@ -45,30 +45,15 @@ const useModalStateStore = create<
   )
 );
 
-/* const [newWidget, setNewWidget] = useState<WidgetData>({
-    id: "",
-    name: "",
-    category: "",
-    bgColor: "",
-    dimension: "",
-    title: "",
-    description: "",
-    type: "data",
-    data: sampleTableData,
-  });
-
-  create a useCreateNewWidget using above data
-  */
-
 const useNewWidget = create<NewWidgetStore>((set) => ({
   newWidget: {
-    id: "",
-    name: "",
-    category: "",
-    bgColor: "",
-    dimension: "",
-    title: "",
-    description: "",
+    id: Date.now().toString(),
+    name: "Reusability Scores",
+    category: "customers",
+    bgColor: "#ffff",
+    dimension: "1x1",
+    title: "Data",
+    description: "Random description",
     type: "data",
     data: sampleTableData,
   },

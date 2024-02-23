@@ -1,17 +1,12 @@
-import React, { useState } from "react";
-import { WidgetData } from "../utils/types";
+import React from "react";
 import { IoAdd } from "react-icons/io5";
 import { PiClockCounterClockwise } from "react-icons/pi";
 import InputComponent from "./ui/InputComponent";
 import navItem from "../assets/navItem.svg";
+import backPattern from "../assets/back_pattern.svg";
 import Button from "./ui/Button";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import WidgetTypeSelectorComponent from "./ui/WidgetTypeSelectorComponent";
-import {
-  samplePieGraphData,
-  sampleSummaryData,
-  sampleTableData,
-} from "../store/sampleData";
 import { useNewWidget } from "../store/appStore";
 
 interface ModalProps {
@@ -26,29 +21,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   const newWidget = useNewWidget((state) => state.newWidget);
   const setNewWidget = useNewWidget((state) => state.setNewWidget);
 
-  const handleSave = (
-    name: string,
-    category: string,
-    bgColor: string,
-    dimension: string,
-    title: string,
-    description: string,
-    type: "data" | "graph" | "summary",
-    subType?: "bar" | "line" | "pie"
-  ) => {
-    const newWidget: WidgetData = {
-      id: Date.now().toString(),
-      name,
-      category,
-      bgColor,
-      dimension,
-      title,
-      description,
-      type,
-      data: samplePieGraphData,
-      subType,
-    };
-    saveWidgets([...widgets, newWidget]);
+  const handleSave = async () => {
+    try {
+      await saveWidgets([...widgets, newWidget]);
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const viewWidgets = () => {
@@ -63,7 +42,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       {/* Centered Modal */}
 
       <section className="fixed inset-0 flex items-center justify-center z-[40]">
-        <div className="w-[90%] sm:w-[85%] md:w-[75%] lg:w-[65%] mx-auto bg-[#ffff] relative py-5">
+        <div className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[75%] mx-auto bg-[#ffff] relative md:py-10 md:px-8 rounded-lg  overflow-hidden">
           <div
             onClick={() => {
               onClose();
@@ -73,16 +52,30 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           >
             <IoAdd className="rotate-45 text-2xl" />
           </div>
-          <div className="flex flex-col">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="flex items-center">
-                <img src={navItem} alt="navItem" />
-                <div>
-                  <span>Create Widget</span>
-                  <p>Manage the glossary of terms of your Database.</p>
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-col md:flex-row justify-between md:items-center">
+              <div className="flex items-center gap-3">
+                <div className="w-[3.5rem] h-[3.5rem] relative">
+                  <img
+                    src={navItem}
+                    className="w-full h-full object-cover rounded-md"
+                    alt="navItem"
+                  />
+                  <div className="w-[336px] h-336px absolute top-0 left-0 -translate-x-[42%] -translate-y-[42%]">
+                    <img src={backPattern} alt="back" />
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <span className="text-[22px] font-semibold text-brand">
+                    Create Widget
+                  </span>
+                  <span className="text-sm text-gray_default">
+                    Manage the glossary of terms of your Database.
+                  </span>
                 </div>
               </div>
-              <div className="w-[35%] relative">
+              <div className="md:w-[35%] relative">
                 <InputComponent
                   type="text"
                   name="widgetName"
@@ -106,11 +99,47 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             <div className="flex flex-col gap-5 md:flex-row">
-              <div className="viewer md:h-[456px] w-full md:w-[65%]">
+              <div className="viewer md:h-[456px] relative w-full md:w-[65%]">
                 <div className="flex md:h-full  overflow-y-auto items-center justify-center h-[40vh] border border-border_light rounded-md">
-                  <pre>
-                    <code>{JSON.stringify(newWidget, null, 2)}</code>
-                  </pre>
+                  <div
+                    className={`block h-[50px] z-20 w-[50px]`}
+                    style={{ backgroundColor: newWidget.bgColor }}
+                  ></div>
+                  <div className="absolute bottom-5 left-[50%] -translate-x-[50%] flex gap-3">
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setNewWidget({ ...newWidget, bgColor: "#282828" });
+                      }}
+                      className={`block w-[22px] h-[22px] aspect-square rounded-full bg-gray_darker cursor-pointer border border-gray_darker ${
+                        newWidget.bgColor === "#282828"
+                          ? "ring-2 ring-offset-4 ring-[#D3D2F5]"
+                          : ""
+                      }`}
+                    ></div>
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setNewWidget({ ...newWidget, bgColor: "#ffff" });
+                      }}
+                      className={`block w-[22px] h-[22px] aspect-square rounded-full bg-[#ffff] cursor-pointer border border-[#CECECE] ${
+                        newWidget.bgColor === "#ffff"
+                          ? "ring-2 ring-offset-4 ring-[#D3D2F5]"
+                          : ""
+                      }`}
+                    ></div>
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setNewWidget({ ...newWidget, bgColor: "#5E5ADB" });
+                      }}
+                      className={`block w-[22px] h-[22px] aspect-square rounded-full bg-brand cursor-pointer border border-brand ${
+                        newWidget.bgColor === "#5E5ADB"
+                          ? "ring-2 ring-offset-4 ring-[#D3D2F5]"
+                          : ""
+                      }`}
+                    ></div>
+                  </div>
                 </div>
               </div>
               <div className="components flex flex-col md:w-[35%]">
@@ -156,16 +185,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                     className="w-[53%] h-[50px] bg-brand text-[#ffff] border-brand rounded-md"
                     type="button"
                     onClick={() => {
-                      handleSave(
-                        "name",
-                        "customer",
-                        "#fffff",
-                        "1x1",
-                        "title",
-                        "random",
-                        "graph",
-                        "pie"
-                      );
+                      handleSave();
                     }}
                   >
                     Save

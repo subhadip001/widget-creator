@@ -15,14 +15,18 @@ export const useLocalStorage = () => {
     }
   });
 
-  const saveWidgets = (widgets: WidgetData[]) => {
-    try {
-      const encryptedData = encryptData(widgets);
-      window.localStorage.setItem(WIDGETS_LOCAL_STORAGE_KEY, encryptedData);
-      setWidgets(widgets);
-    } catch (error) {
-      console.log(error);
-    }
+  const saveWidgets = async (widgets: WidgetData[]) => {
+    return new Promise<void>((resolve, reject) => {
+      try {
+        const encryptedData = encryptData(widgets);
+        window.localStorage.setItem(WIDGETS_LOCAL_STORAGE_KEY, encryptedData);
+        setWidgets(widgets);
+        resolve();
+      } catch (error) {
+        console.log(error);
+        reject();
+      }
+    });
   };
 
   return {
