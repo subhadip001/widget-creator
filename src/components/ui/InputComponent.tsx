@@ -16,7 +16,10 @@ const InputComponent: React.FC<InputComponentProps> = ({
       value={value}
       onChange={onChange}
       name={name}
-      className={className}
+      className={
+        className +
+        " px-2 py-1 border-2 border-[#CBD5E1] text-[#898989] rounded-md text-[14px] outline-none"
+      }
     />
   );
 };

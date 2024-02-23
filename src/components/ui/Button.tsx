@@ -11,7 +11,10 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={className + " rounded-[0.6rem] px-2 border-2 cursor-pointer"}
+      className={
+        className +
+        " rounded-[0.6rem] px-2 border-2 cursor-pointer text-center outline-none"
+      }
       type={type}
       disabled={disabled}
     >

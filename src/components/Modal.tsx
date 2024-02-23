@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { WidgetData } from "../utils/types";
 import { IoAdd } from "react-icons/io5";
+import { PiClockCounterClockwise } from "react-icons/pi";
 import InputComponent from "./ui/InputComponent";
 import navItem from "../assets/navItem.svg";
 import Button from "./ui/Button";
@@ -62,7 +63,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       {/* Centered Modal */}
 
       <section className="fixed inset-0 flex items-center justify-center z-[40]">
-        <div className="w-[90%] sm:w-[85%] md:w-[75%] lg:w-[65%] mx-auto bg-[#ffff] relative">
+        <div className="w-[90%] sm:w-[85%] md:w-[75%] lg:w-[65%] mx-auto bg-[#ffff] relative py-5">
           <div
             onClick={() => {
               onClose();
@@ -81,27 +82,38 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                   <p>Manage the glossary of terms of your Database.</p>
                 </div>
               </div>
-              <div className="">
+              <div className="w-[35%] relative">
                 <InputComponent
                   type="text"
                   name="widgetName"
-                  className="w-full border border-border_light rounded-md p-2"
-                  placeholder="Widget Name"
+                  className="w-full"
+                  placeholder="Enter Widget Name"
                   value={newWidget.name}
                   onChange={(e) => {
                     e.stopPropagation();
                     setNewWidget({ ...newWidget, name: e.target.value });
                   }}
                 />
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setNewWidget({ ...newWidget, name: "" });
+                  }}
+                  className="absolute cursor-pointer right-1 top-[50%] -translate-y-[50%]"
+                >
+                  <IoAdd className="text-2xl rotate-45 text-[#898989]" />
+                </div>
               </div>
             </div>
             <div className="flex flex-col gap-5 md:flex-row">
-              <div className="viewer w-full md:w-[60%]">
-                <div className="flex md:h-[456px] items-center justify-center h-[40vh] border border-border_light rounded-md">
-                  <span>Widget Viewer</span>
+              <div className="viewer md:h-[456px] w-full md:w-[65%]">
+                <div className="flex md:h-full  overflow-y-auto items-center justify-center h-[40vh] border border-border_light rounded-md">
+                  <pre>
+                    <code>{JSON.stringify(newWidget, null, 2)}</code>
+                  </pre>
                 </div>
               </div>
-              <div className="components md:w-[40%]">
+              <div className="components flex flex-col md:w-[35%]">
                 <div className="flex flex-col gap-2">
                   <span className="px-2 text-[#2b2b2b55] text-[13px] font-medium">
                     COMPONENTS
@@ -123,25 +135,25 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                     widgetType="summary"
                   />
                 </div>
-                <div className="btn-group flex">
+                <div className="btn-group flex gap-3 mt-auto">
                   <Button
-                    className="w-full text-gray_dark"
+                    className="w-[30%] h-[50px] flex justify-center items-center text-gray_dark bg-[#F8F8FF] border-gray_light rounded-md"
                     type="button"
                     onClick={() => {
                       viewWidgets();
                     }}
                   >
-                    Re
+                    <PiClockCounterClockwise className="text-xl text-[#A9A9A9]" />
                   </Button>
                   <Button
-                    className="w-full text-gray_default"
+                    className="w-[53%] h-[50px] text-gray_default border-gray_light rounded-md"
                     type="button"
                     onClick={onClose}
                   >
                     Cancel
                   </Button>
                   <Button
-                    className="w-full bg-brand text-white"
+                    className="w-[53%] h-[50px] bg-brand text-[#ffff] border-brand rounded-md"
                     type="button"
                     onClick={() => {
                       handleSave(
