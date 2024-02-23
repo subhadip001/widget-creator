@@ -11,6 +11,7 @@ import {
   sampleSummaryData,
   sampleTableData,
 } from "../store/sampleData";
+import { useNewWidget } from "../store/appStore";
 
 interface ModalProps {
   isOpen: boolean;
@@ -21,6 +22,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const { widgets, saveWidgets } = useLocalStorage();
+  const newWidget = useNewWidget((state) => state.newWidget);
+  const setNewWidget = useNewWidget((state) => state.setNewWidget);
 
   const handleSave = (
     name: string,
@@ -84,42 +87,43 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                   name="widgetName"
                   className="w-full border border-border_light rounded-md p-2"
                   placeholder="Widget Name"
-                  value=""
+                  value={newWidget.name}
                   onChange={(e) => {
-                    e.preventDefault();
+                    e.stopPropagation();
+                    setNewWidget({ ...newWidget, name: e.target.value });
                   }}
                 />
               </div>
             </div>
-            <div className="flex flex-col md:flex-row">
+            <div className="flex flex-col gap-5 md:flex-row">
               <div className="viewer w-full md:w-[60%]">
-                <div className="flex items-center justify-center h-[40vh] border border-border_light rounded-md">
+                <div className="flex md:h-[456px] items-center justify-center h-[40vh] border border-border_light rounded-md">
                   <span>Widget Viewer</span>
                 </div>
               </div>
               <div className="components md:w-[40%]">
-                <span className="px-2 text-[#2b2b2b55] text-[13px] font-medium">
-                  COMPONENTS
-                </span>
                 <div className="flex flex-col gap-2">
+                  <span className="px-2 text-[#2b2b2b55] text-[13px] font-medium">
+                    COMPONENTS
+                  </span>
                   <WidgetTypeSelectorComponent
                     title="Data"
                     description="Random Description"
                     widgetType="data"
                   />
                   <WidgetTypeSelectorComponent
-                    title="Data"
+                    title="Graph"
                     description="Random Description"
                     widgetType="graph"
                     widgetSubType="bar"
                   />
                   <WidgetTypeSelectorComponent
-                    title="Data"
+                    title="Summary"
                     description="Random Description"
                     widgetType="summary"
                   />
                 </div>
-                <div className="btn-group flex flex-col md:flex-row">
+                <div className="btn-group flex">
                   <Button
                     className="w-full text-gray_dark"
                     type="button"

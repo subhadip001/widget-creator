@@ -14,64 +14,105 @@ const WidgetTypeSelectorComponent: React.FC<
   return (
     <div
       className={`w-full text-start px-3 py-2 rounded-md border-2 ${
-        newWidget.type === widgetType ? "border-brand" : "border-border_light"
+        newWidget.type === widgetType
+          ? "border-brand shadow-md"
+          : "border-border_light"
       }`}
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation();
+        if (widgetType === "graph") {
+          setNewWidget({
+            ...newWidget,
+            type: widgetType,
+            subType: "bar",
+          });
+          return;
+        }
         setNewWidget({
           ...newWidget,
           type: widgetType,
-          subType: "bar",
+          subType: undefined,
         });
       }}
     >
       <span className="text-base">{title}</span>
       <span className="text-[#888891] block text-xs">{description}</span>
       {widgetType === "graph" ? (
-        <div className="grid grid-cols-3 w-full z-20 md:w-[50%] bg-[#F4F4F5]">
+        <div className="grid grid-cols-3 w-full md:w-[50%] bg-[#F4F4F5] py-1 px-1 gap-1 rounded-lg">
           <button
             onClick={(e) => {
               e.stopPropagation();
+              if (newWidget.type !== "graph") {
+                setNewWidget({
+                  ...newWidget,
+                  type: widgetType,
+                  subType: "bar",
+                });
+                return;
+              }
               setNewWidget({
                 ...newWidget,
                 subType: "bar",
               });
             }}
             className={`${
-              newWidget.subType === "bar" ? "bg-[#ffff]" : "bg-transparent"
-            }`}
+              newWidget.subType === "bar"
+                ? "bg-[#ffff] rounded-md shadow-md"
+                : "bg-transparent"
+            } flex item-center justify-center py-[6px]`}
             type="button"
           >
-            <img className="w-[14px] h-[14px]" src={barIcon} alt="bar" />
+            <img className="w-[15px] h-[15px]" src={barIcon} alt="bar" />
           </button>
           <button
             onClick={(e) => {
               e.stopPropagation();
+              if (newWidget.type !== "graph") {
+                setNewWidget({
+                  ...newWidget,
+                  type: widgetType,
+                  subType: "line",
+                });
+                return;
+              }
               setNewWidget({
                 ...newWidget,
                 subType: "line",
               });
             }}
             className={`${
-              newWidget.subType === "line" ? "bg-[#ffff]" : "bg-transparent"
-            }`}
+              newWidget.subType === "line"
+                ? "bg-[#ffff] rounded-md shadow-md"
+                : "bg-transparent"
+            } flex item-center justify-center py-[6px]`}
             type="button"
           >
-            <img className="w-[14px] h-[14px]" src={lineIcon} alt="line" />
+            <img className="w-[15px] h-[15px]" src={lineIcon} alt="line" />
           </button>
           <button
             onClick={(e) => {
               e.stopPropagation();
+              if (newWidget.type !== "graph") {
+                setNewWidget({
+                  ...newWidget,
+                  type: widgetType,
+                  subType: "pie",
+                });
+                return;
+              }
               setNewWidget({
                 ...newWidget,
                 subType: "pie",
               });
             }}
             className={`${
-              newWidget.subType === "pie" ? "bg-[#ffff]" : "bg-transparent"
-            }`}
+              newWidget.subType === "pie"
+                ? "bg-[#ffff] rounded-md shadow-md"
+                : "bg-transparent"
+            } flex items-center justify-center py-[6px]`}
             type="button"
           >
-            <img className="w-[14px] h-[14px]" src={pieIcon} alt="pie" />
+            <img className="w-[15px] h-[15px]" src={pieIcon} alt="pie" />
           </button>
         </div>
       ) : null}
