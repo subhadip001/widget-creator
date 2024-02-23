@@ -1,7 +1,7 @@
 import React from "react";
 import { TabProps } from "../../utils/types";
 import { useTabStore } from "../../store/appStore";
-import { IoAdd, IoAddOutline, IoAddSharp } from "react-icons/io5";
+import { IoAdd } from "react-icons/io5";
 
 const Tab: React.FC<TabProps> = ({ active, label }) => {
   const activeTab: string = useTabStore((state) => state.activeTab);
