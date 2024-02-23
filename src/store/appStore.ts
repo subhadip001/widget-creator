@@ -14,8 +14,8 @@ interface ModalStateStore {
 }
 
 interface NewWidgetStore {
-  newWidget: object;
-  setNewWidget: (widget: object) => void;
+  newWidget: WidgetData;
+  setNewWidget: (widget: WidgetData) => void;
 }
 
 const useTabStore = create<TabStore, [["zustand/persist", TabStore]]>(
@@ -72,7 +72,7 @@ const useNewWidget = create<NewWidgetStore>((set) => ({
     type: "data",
     data: sampleTableData,
   },
-  setNewWidget: (widget: object) => set(() => ({ newWidget: widget })),
+  setNewWidget: (widget: WidgetData) => set(() => ({ newWidget: widget })),
 }));
 
 export { useTabStore, useModalStateStore, useNewWidget };

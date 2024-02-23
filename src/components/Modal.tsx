@@ -111,6 +111,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                     title="Data"
                     description="Random Description"
                     widgetType="graph"
+                    widgetSubType="bar"
                   />
                   <WidgetTypeSelectorComponent
                     title="Data"
