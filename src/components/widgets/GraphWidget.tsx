@@ -55,7 +55,7 @@ const GraphWidget: React.FC<GraphWidgetProps> = ({ widget }) => {
   } else if (widget.bgColor === "#5E5ADB") {
     activeFilterClass = "text-[#ffff]";
     activeFilterBorderColor = "#ffff";
-    textColor = "#  ";
+    textColor = "#ffff";
   } else if (widget.bgColor === "#282828") {
     activeFilterClass = "text-[#ffff]";
     activeFilterBorderColor = "#ffff";
