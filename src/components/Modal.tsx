@@ -103,29 +103,35 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             </div>
             <div className="flex flex-col gap-5 md:flex-row">
               <div className="viewer md:h-[456px] relative w-full md:w-[65%]">
-                <div className="flex md:h-full  overflow-y-auto items-center justify-center h-[40vh] border border-border_light rounded-md">
-                  <div className="absolute right-0 top-0 flex gap-1 items-center">
-                    <span>{zoom}</span>
-                    <div className="flex gap-1">
-                      <HiMagnifyingGlassPlus
-                        onClick={() => setZoom(zoom + 10)}
-                        className="cursor-pointer"
-                      />
-                    </div>
-                    <div>
-                      <HiMagnifyingGlassMinus
-                        onClick={() => setZoom(zoom - 10)}
-                        className="cursor-pointer"
-                      />
+                <div className="flex md:h-full overflow-y-auto items-center justify-center h-[40vh] border border-border_light rounded-md">
+                  <div className="absolute p-1 right-5 top-3 flex gap-1 items-center bg-[#ffff] border border-gray_light rounded-sm text-[#7B7B7B]">
+                    <span className="px-3 py-1 bg-[#EDEDED] bg-opacity-20 text-[#7B7B7B] rounded-sm border border-gray_light">
+                      {zoom}%
+                    </span>
+                    <div className="flex divide-x-[1px] divide-[#D7D7D7]">
+                      <div className="px-2">
+                        <HiMagnifyingGlassPlus
+                          onClick={() => setZoom(zoom + 10)}
+                          className="cursor-pointer"
+                        />
+                      </div>
+                      <div className="px-2">
+                        <HiMagnifyingGlassMinus
+                          onClick={() => setZoom(zoom - 10)}
+                          className="cursor-pointer"
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="absolute left-0 top-0">{newWidget.dimension}</div>
+                  <div className="absolute left-6 top-5 text-[#5E5ADB] opacity-70 font-semibold text-lg">
+                    {newWidget.dimension}
+                  </div>
                   <div
                     style={{
                       transform: `scale(${zoom / 100})`,
                     }}
                   >
-                    <span className="uppercase block tracking-wider text-xs text-[#6B6B6B] font-bold text-center">
+                    <span className="uppercase block tracking-wider text-xs text-[#6B6B6B] font-bold text-center mb-1">
                       {newWidget.name}
                     </span>
                     {newWidget.type === "data" ? (

@@ -1,6 +1,12 @@
 import React from "react";
 import { PieChart } from "react-minimal-pie-chart";
-import { BarGraphData, LineGraphData, PieGraphData } from "../../utils/types";
+import {
+  BarGraphData,
+  GraphData,
+  LineGraphData,
+  PieGraphData,
+  WidgetData,
+} from "../../utils/types";
 
 interface PieGraphWidgetProps {
   data: PieGraphData;
@@ -15,17 +21,16 @@ interface LineGraphWidgetProps {
 }
 
 interface GraphWidgetProps {
-  subType?: "bar" | "line" | "pie" | undefined;
-  data: BarGraphData | LineGraphData | PieGraphData;
+  widget: WidgetData<GraphData>;
 }
 
-const GraphWidget: React.FC<GraphWidgetProps> = ({ subType, data }) => {
-  if (subType === "bar") {
-    return <BarGraphWidget data={data as BarGraphData} />;
-  } else if (subType === "line") {
-    return <LineGraphWidget data={data as LineGraphData} />;
-  } else if (subType === "pie") {
-    return <PieGraphWidget data={data as PieGraphData} />;
+const GraphWidget: React.FC<GraphWidgetProps> = ({ widget }) => {
+  if (widget.subType === "bar") {
+    return <BarGraphWidget data={widget.data as BarGraphData} />;
+  } else if (widget.subType === "line") {
+    return <LineGraphWidget data={widget.data as LineGraphData} />;
+  } else if (widget.subType === "pie") {
+    return <PieGraphWidget data={widget.data as PieGraphData} />;
   }
   return null;
 };
@@ -39,7 +44,6 @@ const PieGraphWidget: React.FC<PieGraphWidgetProps> = ({ data }) => {
 
   return (
     <div className="widget">
-      {/* Time Filter */}
       <div className="time-filter">
         {data.timeFilterOptions.map((filter) => (
           <button

@@ -37,3 +37,23 @@
   background-color: #8D8D8D;
   border-radius: 8px;
 } */
+
+.shadow-card {
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filter-active {
+  position: relative;
+}
+
+.filter-active::after {
+  content: "";
+  position: absolute;
+  bottom: -1.8px;
+  /* Adjust this value to change the offset */
+  left: 0;
+  width: 100%;
+  border-bottom: 4px solid var(--border-color, #5E5ADB);
+  /* Use CSS variable */
+  /* Adjust this value to change the border color */
+}

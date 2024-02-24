@@ -63,7 +63,7 @@ export type SummaryData = {
   summaryText: string;
 };
 
-export type WidgetData = {
+export type WidgetData<T> = {
   id: string;
   name: string;
   category: string;
@@ -73,7 +73,8 @@ export type WidgetData = {
   description?: string;
   type: "data" | "graph" | "summary";
   subType?: "bar" | "line" | "pie" | undefined;
-  data: TableData | GraphData | SummaryData;
+  // data: TableData | GraphData | SummaryData;
+  data: T;
 };
 
 export type ButtonProps = {
