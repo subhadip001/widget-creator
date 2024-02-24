@@ -1,22 +1,24 @@
 import React from "react";
-import { WidgetTypeSelectorComponentProps } from "../../utils/types";
+import { BarGraphData, LineGraphData, PieGraphData, WidgetTypeSelectorComponentProps } from "../../utils/types";
 import { useNewWidget } from "../../store/appStore";
 import barIcon from "../../assets/bar_icon.svg";
 import lineIcon from "../../assets/line_icon.svg";
 import pieIcon from "../../assets/pie_icon.svg";
 import {
-  sampleBarGraphData,
-  sampleLineGraphData,
-  samplePieGraphData,
   sampleSummaryData,
   sampleTableData,
 } from "../../store/sampleData";
+import { getSampleBarGraphData, getSampleLineGraphData, getSamplePieGraphData } from "../../utils/randomDataGen";
 
 const WidgetTypeSelectorComponent: React.FC<
   WidgetTypeSelectorComponentProps
 > = ({ title, description, widgetType }) => {
   const newWidget = useNewWidget((state) => state.newWidget);
   const setNewWidget = useNewWidget((state) => state.setNewWidget);
+
+  const sampleBarGraphData: BarGraphData = getSampleBarGraphData();
+  const sampleLineGraphData: LineGraphData = getSampleLineGraphData();
+   const samplePieGraphData: PieGraphData = getSamplePieGraphData();
 
   return (
     <div
