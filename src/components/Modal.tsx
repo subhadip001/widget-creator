@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoAdd } from "react-icons/io5";
 import { PiClockCounterClockwise } from "react-icons/pi";
 import InputComponent from "./ui/InputComponent";
@@ -8,6 +8,8 @@ import Button from "./ui/Button";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import WidgetTypeSelectorComponent from "./ui/WidgetTypeSelectorComponent";
 import { useNewWidget } from "../store/appStore";
+import DataWidget from "./widgets/DataWidget";
+import { HiMagnifyingGlassPlus, HiMagnifyingGlassMinus } from "react-icons/hi2";
 
 interface ModalProps {
   isOpen: boolean;
@@ -20,6 +22,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   const { widgets, saveWidgets } = useLocalStorage();
   const newWidget = useNewWidget((state) => state.newWidget);
   const setNewWidget = useNewWidget((state) => state.setNewWidget);
+  const [zoom, setZoom] = useState(100);
 
   const handleSave = async () => {
     try {
@@ -37,7 +40,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   return (
     <>
       {/* Backdrop with opacity */}
-      <div className="fixed inset-0 bg-[#0000003a] z-[30] cursor-pointer"></div>
+      <div className="fixed inset-0 bg-[#00000057] z-[30] cursor-pointer"></div>
 
       {/* Centered Modal */}
 
@@ -101,10 +104,34 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             <div className="flex flex-col gap-5 md:flex-row">
               <div className="viewer md:h-[456px] relative w-full md:w-[65%]">
                 <div className="flex md:h-full  overflow-y-auto items-center justify-center h-[40vh] border border-border_light rounded-md">
+                  <div className="absolute right-0 top-0 flex gap-1 items-center">
+                    <span>{zoom}</span>
+                    <div className="flex gap-1">
+                      <HiMagnifyingGlassPlus
+                        onClick={() => setZoom(zoom + 10)}
+                        className="cursor-pointer"
+                      />
+                    </div>
+                    <div>
+                      <HiMagnifyingGlassMinus
+                        onClick={() => setZoom(zoom - 10)}
+                        className="cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                  <div className="absolute left-0 top-0">{newWidget.dimension}</div>
                   <div
-                    className={`block h-[50px] z-20 w-[50px]`}
-                    style={{ backgroundColor: newWidget.bgColor }}
-                  ></div>
+                    style={{
+                      transform: `scale(${zoom / 100})`,
+                    }}
+                  >
+                    <span className="uppercase block tracking-wider text-xs text-[#6B6B6B] font-bold text-center">
+                      {newWidget.name}
+                    </span>
+                    {newWidget.type === "data" ? (
+                      <DataWidget widget={newWidget} />
+                    ) : null}
+                  </div>
                   <div className="absolute bottom-5 left-[50%] -translate-x-[50%] flex gap-3">
                     <div
                       onClick={(e) => {
