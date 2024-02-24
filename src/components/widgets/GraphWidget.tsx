@@ -8,6 +8,18 @@ import {
   WidgetData,
 } from "../../utils/types";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+  LineChart,
+  Line,
+} from "recharts";
 
 interface PieGraphWidgetProps {
   data: PieGraphData;
@@ -59,6 +71,33 @@ const GraphWidget: React.FC<GraphWidgetProps> = ({ widget }) => {
         }}
         className="z-30 pt-5 pb-3 rounded-2xl shadow-card w-[15rem] h-[15rem]"
       >
+        <div className="flex border-b-[1px] border-[#E1E1E1]">
+          {(widget.data as GraphData).timeFilterOptions.map((filter, i) => (
+            <div
+              key={filter}
+              onClick={() => setSelectedTimeFilter(filter)}
+              className={`px-3 py-[1px] cursor-pointer ${
+                i === 0 ? "pl-5" : ""
+              } text-xs ${
+                selectedTimeFilter === filter
+                  ? activeFilterClass + " filter-active font-semibold"
+                  : "text-[#BBBBBB]"
+              }`}
+              style={
+                selectedTimeFilter === filter
+                  ? ({
+                      "--border-color": activeFilterBorderColor,
+                    } as React.CSSProperties)
+                  : {}
+              }
+            >
+              {filter}
+            </div>
+          ))}
+          <div className="ml-auto px-2 mr-2 cursor-pointer text-[#BBBBBB]">
+            <HiOutlineDotsHorizontal className="translate-y-[0.1rem] text-[#D9D9D9] " />
+          </div>
+        </div>
         <BarGraphWidget data={widget.data as BarGraphData} />
       </section>
     );
@@ -70,6 +109,33 @@ const GraphWidget: React.FC<GraphWidgetProps> = ({ widget }) => {
         }}
         className="z-30 pt-5 pb-3 rounded-2xl shadow-card w-[15rem] h-[15rem]"
       >
+        <div className="flex border-b-[1px] border-[#E1E1E1]">
+          {(widget.data as GraphData).timeFilterOptions.map((filter, i) => (
+            <div
+              key={filter}
+              onClick={() => setSelectedTimeFilter(filter)}
+              className={`px-3 py-[1px] cursor-pointer ${
+                i === 0 ? "pl-5" : ""
+              } text-xs ${
+                selectedTimeFilter === filter
+                  ? activeFilterClass + " filter-active font-semibold"
+                  : "text-[#BBBBBB]"
+              }`}
+              style={
+                selectedTimeFilter === filter
+                  ? ({
+                      "--border-color": activeFilterBorderColor,
+                    } as React.CSSProperties)
+                  : {}
+              }
+            >
+              {filter}
+            </div>
+          ))}
+          <div className="ml-auto px-2 mr-2 cursor-pointer text-[#BBBBBB]">
+            <HiOutlineDotsHorizontal className="translate-y-[0.1rem] text-[#D9D9D9] " />
+          </div>
+        </div>
         <LineGraphWidget data={widget.data as LineGraphData} />
       </section>
     );
@@ -133,6 +199,7 @@ const PieGraphWidget: React.FC<PieGraphWidgetProps> = ({ data }) => {
           lineWidth={30}
           paddingAngle={5}
           center={[85, 70]}
+          totalValue={data.totalOrders}
           viewBoxSize={[170, 140]}
           segmentsStyle={{ cursor: "pointer", borderRadius: "5px" }}
           rounded={false}
@@ -149,70 +216,97 @@ const PieGraphWidget: React.FC<PieGraphWidgetProps> = ({ data }) => {
   );
 };
 
+const formatYAxisTick = (tick: number) => {
+  return tick === 0 ? "0" : `${Math.round(tick / 1000)}k`;
+};
+
 const BarGraphWidget: React.FC<BarGraphWidgetProps> = ({ data }) => {
   return (
-    <div className="widget">
-      {/* Time Filter */}
-      <div className="time-filter">
-        {data.timeFilterOptions.map((filter) => (
-          <button
-            key={filter}
-            className={`time-filter-button ${
-              data.selectedTimeFilter === filter ? "selected" : ""
-            }`}
-          >
-            {filter}
-          </button>
-        ))}
-      </div>
-
-      {/* Bar Graph */}
-      {/* <div className="bar-graph">
-        {data.datasets.map((dataset, index) => (
-          <div
-            key={index}
-            className="bar"
-            style={{
-              height: `${(dataset.data[0] / data.maxValue) * 100}%`,
-              backgroundColor: dataset.borderColor,
+    <div className="widget flex justify-center items-center w-[14rem] h-[12rem]">
+      <ResponsiveContainer width="100%" height={160}>
+        <BarChart
+          data={data.data.categories}
+          margin={{ top: 10, right: 0, left: 0, bottom: 10 }}
+        >
+          <CartesianGrid vertical={false} stroke="#F4F4F4" />
+          <XAxis hide />
+          <YAxis
+            tickFormatter={formatYAxisTick}
+            domain={[0, "dataMax + 10000"]}
+            tick={{
+              fill: "#474747",
+              fontSize: 11,
+              strokeWidth: 0,
+              stroke: "none",
+              opacity: 0.7,
             }}
-          ></div>
-        ))}
-      </div> */}
+            axisLine={false}
+          />
+          <Tooltip />
+          <Bar dataKey="value" radius={[10, 10, 10, 10]}>
+            {data.data.categories.map((entry, index) => (
+              <Cell key={`cell-${index}`} width={10} fill={entry.color} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 };
 
 const LineGraphWidget: React.FC<LineGraphWidgetProps> = ({ data }) => {
-  return (
-    <div className="widget">
-      {/* Time Filter */}
-      <div className="time-filter">
-        {data.timeFilterOptions.map((filter) => (
-          <button
-            key={filter}
-            className={`time-filter-button ${
-              data.selectedTimeFilter === filter ? "selected" : ""
-            }`}
-          >
-            {filter}
-          </button>
-        ))}
-      </div>
+  type ChartDataPoint = {
+    time: string;
+    [key: string]: string | number; // This index signature allows for any string key to be used
+  };
 
-      {/* Line Graph */}
-      {/* <div className="line-graph">
-        {data.datasets.map((dataset, index) => (
-          <div
-            key={index}
-            className="line"
-            style={{
-              height: `${(dataset.data[0] / data.maxValue) * 100}%`,
-              backgroundColor: dataset.borderColor,
+  const chartData: ChartDataPoint[] = data.dataSeries[0].dataPoints.map(
+    (_, index) => {
+      return data.dataSeries.reduce<ChartDataPoint>(
+        (acc, series) => {
+          acc[series.name] = series.dataPoints[index].value;
+          return acc;
+        },
+        { time: data.dataSeries[0].dataPoints[index].time }
+      );
+    }
+  );
+  return (
+    <div className="widget flex justify-center items-center w-[14rem] h-[12rem]">
+      <ResponsiveContainer width="100%" height={160}>
+        <LineChart
+          data={chartData}
+          margin={{ top: 10, right: 0, left: 0, bottom: 10 }}
+        >
+          <CartesianGrid horizontal={false} stroke="#F4F4F4" />
+          <XAxis hide />
+          <YAxis
+            tickFormatter={formatYAxisTick}
+            domain={[0, "dataMax + 10000"]}
+            tick={{
+              fill: "#474747",
+              fontSize: 11,
+              strokeWidth: 0,
+              stroke: "none",
+              opacity: 0.7,
             }}
-          ></div>
-        ))}
-      </div> */}
+            axisLine={false}
+          />
+          <Tooltip />
+          {data.dataSeries.map((series) => (
+            <Line
+              key={series.name}
+              type="linear"
+              dataKey={series.name}
+              stroke={series.color}
+              dot={false}
+              strokeWidth={4}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          ))}
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 };

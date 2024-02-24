@@ -25,27 +25,32 @@ export const sampleBarGraphData: BarGraphData = {
   timeFilterOptions: ["7d", "14d", "30d"],
   selectedTimeFilter: "7d",
   data: {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    datasets: [
+    title: "Sales by Category",
+    categories: [
       {
-        label: "Processed",
-        data: [12, 19, 3, 5, 2, 3, 9],
-        backgroundColor: "#5FDC8F",
+        name: "Category A",
+        value: Math.floor(Math.random() * (40000 - 100 + 1)) + 100,
+        color: "#ffca28",
       },
       {
-        label: "Shipped",
-        data: [2, 3, 20, 5, 1, 4, 9],
-        backgroundColor: "#FF8E8E",
+        name: "Category B",
+        value: Math.floor(Math.random() * (40000 - 100 + 1)) + 100,
+        color: "#ff7043",
       },
       {
-        label: "Returned",
-        data: [3, 10, 13, 15, 22, 30, 12],
-        backgroundColor: "#F2E144",
+        name: "Category C",
+        value: Math.floor(Math.random() * (40000 - 100 + 1)) + 100,
+        color: "#29b6f6",
       },
       {
-        label: "Cancelled",
-        data: [3, 10, 13, 15, 22, 30, 12],
-        backgroundColor: "#82D1DB",
+        name: "Category D",
+        value: Math.floor(Math.random() * (40000 - 100 + 1)) + 100,
+        color: "#66bb6a",
+      },
+      {
+        name: "Category E",
+        value: Math.floor(Math.random() * (40000 - 10 + 1)) + 10,
+        color: "#ab47bc",
       },
     ],
   },
@@ -54,60 +59,65 @@ export const sampleBarGraphData: BarGraphData = {
 export const sampleLineGraphData: LineGraphData = {
   timeFilterOptions: ["7d", "14d", "30d"],
   selectedTimeFilter: "7d",
-  data: {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    datasets: [
-      {
-        label: "Processed",
-        data: [12, 19, 3, 5, 2, 3, 9],
-        borderColor: "#5FDC8F",
-        fill: false,
-      },
-      {
-        label: "Shipped",
-        data: [2, 3, 20, 5, 1, 4, 9],
-        borderColor: "#FF8E8E",
-        fill: false,
-      },
-      {
-        label: "Returned",
-        data: [3, 10, 13, 15, 22, 30, 12],
-        borderColor: "#F2E144",
-        fill: false,
-      },
-      {
-        label: "Cancelled",
-        data: [3, 10, 13, 15, 22, 30, 12],
-        borderColor: "#82D1DB",
-        fill: false,
-      },
-    ],
-  },
+  dataSeries: [
+    {
+      name: "Category A",
+      color: "#5FDC8F",
+      dataPoints: Array.from({ length: 5 }, (_, i) => ({
+        time: `Day ${i + 1}`,
+        value: Math.floor(Math.random() * (40000 - 10 + 1)) + 10,
+      })),
+    },
+    {
+      name: "Category B",
+      color: "#96D3FF",
+      dataPoints: Array.from({ length: 5 }, (_, i) => ({
+        time: `Day ${i + 1}`,
+        value: Math.floor(Math.random() * (40000 - 10 + 1)) + 10,
+      })),
+    },
+    {
+      name: "Category C",
+      color: "#FF8E8E",
+      dataPoints: Array.from({ length: 5 }, (_, i) => ({
+        time: `Day ${i + 1}`,
+        value: Math.floor(Math.random() * (40000 - 10 + 1)) + 10,
+      })),
+    },
+  ],
 };
+
+const processedCount = Math.floor(Math.random() * (40000 - 30000 + 1)) + 30000;
+const shippedCount =
+  Math.floor(Math.random() * (processedCount - 20000 + 1)) + 20000;
+const returnedCount =
+  Math.floor(Math.random() * (shippedCount - 10000 + 1)) + 10000;
+const cancelledCount =
+  Math.floor(Math.random() * (returnedCount - 5000 + 1)) + 5000;
 
 export const samplePieGraphData = {
   timeFilterOptions: ["7d", "14d", "30d"],
   selectedTimeFilter: "7d",
-  totalOrders: 89000,
+  totalOrders: processedCount + shippedCount + returnedCount + cancelledCount,
   orderCategories: [
     {
       category: "Processed",
-      count: 30000,
+      count: processedCount,
       color: "#54D787",
     },
     {
       category: "Shipped",
-      count: 25000,
-      color: "#5E5ADB",
+      count: shippedCount,
+      color: "#29b6f6",
     },
     {
       category: "Returned",
-      count: 15000,
+      count: returnedCount,
       color: "#F2E144",
     },
     {
       category: "Cancelled",
-      count: 19000,
+      count: cancelledCount,
       color: "#FF6969",
     },
   ],

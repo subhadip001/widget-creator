@@ -18,7 +18,7 @@ const SummaryWidget: React.FC<SummaryWidgetProps> = ({ widget }) => {
       className="z-30 pt-5 pb-3 rounded-2xl shadow-card w-[15rem] h-[15rem]"
     >
       <div className="flex border-b-[1px] px-4 border-[#E1E1E1]">
-        <div className="text-xs py-[1px] text-[#B5B5B5] flex gap-1 items-center">
+        <div className="text-xs py-[1px] text-[#B5B5B5] flex gap-1 items-center cursor-pointer">
           <span>{widget.data.timePeriod}</span>
           <div>
             <IoIosArrowDown />

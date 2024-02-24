@@ -8,11 +8,11 @@ export type BarGraphData = {
   timeFilterOptions: string[];
   selectedTimeFilter: string;
   data: {
-    labels: string[];
-    datasets: {
-      label: string;
-      data: number[];
-      backgroundColor: string;
+    title: string;
+    categories: {
+      name: string;
+      value: number;
+      color: string;
     }[];
   };
 };
@@ -20,15 +20,14 @@ export type BarGraphData = {
 export type LineGraphData = {
   timeFilterOptions: string[];
   selectedTimeFilter: string;
-  data: {
-    labels: string[];
-    datasets: {
-      label: string;
-      data: number[];
-      borderColor: string;
-      fill: boolean;
+  dataSeries: {
+    name: string;
+    color: string;
+    dataPoints: {
+      time: string;
+      value: number;
     }[];
-  };
+  }[];
 };
 
 export type PieGraphData = {

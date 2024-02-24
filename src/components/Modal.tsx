@@ -39,7 +39,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     }
   };
 
-
   return (
     <>
       {/* Backdrop with opacity */}
@@ -107,7 +106,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             <div className="flex flex-col gap-5 md:flex-row">
               <div className="viewer md:h-[456px] relative w-full md:w-[65%]">
                 <div className="flex md:h-full overflow-y-auto items-center justify-center h-[40vh] border border-border_light rounded-md">
-                  <div className="absolute p-1 right-5 top-3 flex gap-1 items-center bg-[#ffff] border border-gray_light rounded-sm text-[#7B7B7B]">
+                  <div className="absolute z-20 p-1 right-5 top-3 flex gap-1 items-center bg-[#ffff] border border-gray_light rounded-sm text-[#7B7B7B]">
                     <span className="px-3 py-1 bg-[#EDEDED] bg-opacity-20 text-[#7B7B7B] rounded-sm border border-gray_light">
                       {zoom}%
                     </span>
@@ -126,7 +125,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="absolute left-6 top-5 text-[#5E5ADB] opacity-70 font-semibold text-lg">
+                  <div className="absolute z-20 select-none left-6 top-5 text-[#5E5ADB] opacity-70 font-semibold text-lg">
                     {newWidget.dimension}
                   </div>
                   <div
@@ -212,9 +211,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                   <Button
                     className="w-[30%] h-[50px] flex justify-center items-center text-gray_dark bg-[#F8F8FF] border-gray_light rounded-md"
                     type="button"
-                    onClick={() => {
-                      
-                    }}
+                    onClick={() => {}}
                   >
                     <PiClockCounterClockwise className="text-xl text-[#A9A9A9]" />
                   </Button>
