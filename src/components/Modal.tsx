@@ -41,26 +41,22 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {/* Backdrop with opacity */}
       <div className="fixed inset-0 bg-[#00000057] z-[30] cursor-pointer"></div>
 
-      {/* Centered Modal */}
-
       <section className="fixed inset-0 flex items-center justify-center z-[40]">
-        <div className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[75%] mx-auto bg-[#ffff] relative md:py-10 md:px-8 rounded-lg  overflow-hidden">
+        <div className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[75%] mx-auto bg-[#ffff] relative py-4 pt-3 px-3 md:py-10 md:pt-14 md:px-8 rounded-lg  overflow-hidden">
           <div
             onClick={() => {
               onClose();
-              console.log("closed");
             }}
-            className="absolute top-4 right-4 cursor-pointer"
+            className="absolute top-4 z-[25] right-4 cursor-pointer"
           >
             <IoAdd className="rotate-45 text-2xl" />
           </div>
           <div className="flex flex-col gap-3">
-            <div className="flex flex-col md:flex-row justify-between md:items-center">
+            <div className="flex flex-col md:gap-0 gap-3 md:flex-row justify-between md:items-center">
               <div className="flex items-center gap-3">
-                <div className="w-[3.5rem] h-[3.5rem] relative">
+                <div className="md:w-[3.5rem] md:h-[3.5rem] w-[2.5rem] h-[2.5rem] relative">
                   <img
                     src={navItem}
                     className="w-full h-full object-cover rounded-md"
@@ -71,11 +67,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-1 z-20">
-                  <span className="text-[22px] font-semibold text-brand">
+                <div className="flex flex-col md:gap-1 z-20">
+                  <span className="md:text-[22px] text-lg font-semibold text-brand">
                     Create Widget
                   </span>
-                  <span className="text-sm text-gray_default">
+                  <span className="md:text-sm text-xs text-gray_default">
                     Manage the glossary of terms of your Database.
                   </span>
                 </div>
@@ -133,7 +129,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                       transform: `scale(${zoom / 100})`,
                     }}
                   >
-                    <span className="uppercase block tracking-wider text-xs text-[#6B6B6B] font-bold text-center mb-1">
+                    <span className="uppercase select-none block tracking-wider text-xs text-[#6B6B6B] font-bold text-center mb-1">
                       {newWidget.name}
                     </span>
                     {newWidget.type === "data" ? (
@@ -185,27 +181,29 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                   </div>
                 </div>
               </div>
-              <div className="components flex flex-col md:w-[35%]">
+              <div className="components flex flex-col md:gap-0 gap-3 md:w-[35%]">
                 <div className="flex flex-col gap-2">
                   <span className="px-2 text-[#2b2b2b55] text-[13px] font-medium">
                     COMPONENTS
                   </span>
-                  <WidgetTypeSelectorComponent
-                    title="Data"
-                    description="Random Description"
-                    widgetType="data"
-                  />
-                  <WidgetTypeSelectorComponent
-                    title="Graph"
-                    description="Random Description"
-                    widgetType="graph"
-                    widgetSubType="bar"
-                  />
-                  <WidgetTypeSelectorComponent
-                    title="Summary"
-                    description="Random Description"
-                    widgetType="summary"
-                  />
+                  <div className="flex md:flex-col gap-2">
+                    <WidgetTypeSelectorComponent
+                      title="Data"
+                      description="Random Description"
+                      widgetType="data"
+                    />
+                    <WidgetTypeSelectorComponent
+                      title="Graph"
+                      description="Random Description"
+                      widgetType="graph"
+                      widgetSubType="bar"
+                    />
+                    <WidgetTypeSelectorComponent
+                      title="Summary"
+                      description="Random Description"
+                      widgetType="summary"
+                    />
+                  </div>
                 </div>
                 <div className="btn-group flex gap-3 mt-auto">
                   <Button

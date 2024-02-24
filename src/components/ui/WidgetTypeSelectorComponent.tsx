@@ -1,14 +1,20 @@
 import React from "react";
-import { BarGraphData, LineGraphData, PieGraphData, WidgetTypeSelectorComponentProps } from "../../utils/types";
+import {
+  BarGraphData,
+  LineGraphData,
+  PieGraphData,
+  WidgetTypeSelectorComponentProps,
+} from "../../utils/types";
 import { useNewWidget } from "../../store/appStore";
 import barIcon from "../../assets/bar_icon.svg";
 import lineIcon from "../../assets/line_icon.svg";
 import pieIcon from "../../assets/pie_icon.svg";
+import { sampleSummaryData, sampleTableData } from "../../store/sampleData";
 import {
-  sampleSummaryData,
-  sampleTableData,
-} from "../../store/sampleData";
-import { getSampleBarGraphData, getSampleLineGraphData, getSamplePieGraphData } from "../../utils/randomDataGen";
+  getSampleBarGraphData,
+  getSampleLineGraphData,
+  getSamplePieGraphData,
+} from "../../utils/randomDataGen";
 
 const WidgetTypeSelectorComponent: React.FC<
   WidgetTypeSelectorComponentProps
@@ -18,11 +24,11 @@ const WidgetTypeSelectorComponent: React.FC<
 
   const sampleBarGraphData: BarGraphData = getSampleBarGraphData();
   const sampleLineGraphData: LineGraphData = getSampleLineGraphData();
-   const samplePieGraphData: PieGraphData = getSamplePieGraphData();
+  const samplePieGraphData: PieGraphData = getSamplePieGraphData();
 
   return (
     <div
-      className={`w-full text-start px-4 py-[1.1rem] rounded-md border-2 ${
+      className={`w-full text-start md:px-4 px-3 py-1 md:py-[1.1rem] rounded-md border-2 cursor-pointer ${
         newWidget.type === widgetType
           ? "border-brand shadow-md"
           : "border-border_light"
@@ -46,8 +52,10 @@ const WidgetTypeSelectorComponent: React.FC<
         });
       }}
     >
-      <span className="text-base text-[#585858]">{title}</span>
-      <span className="text-[#888891] block text-xs">{description}</span>
+      <span className="md:text-base text-xs text-[#585858]">{title}</span>
+      <span className="text-[#888891] block md:text-xs text-[10px]">
+        {description}
+      </span>
       {widgetType === "graph" ? (
         <div className="grid grid-cols-3 w-full md:w-[50%] bg-[#F4F4F5] py-1 px-1 gap-1 rounded-lg">
           <button
