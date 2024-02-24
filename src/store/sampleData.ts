@@ -1,4 +1,9 @@
-import { BarGraphData, LineGraphData, SummaryData, TableData } from "../utils/types";
+import {
+  BarGraphData,
+  LineGraphData,
+  SummaryData,
+  TableData,
+} from "../utils/types";
 
 export const sampleTableData: TableData = {
   timeFilter: ["7d", "14d", "30d"],
@@ -16,7 +21,7 @@ export const sampleTableData: TableData = {
   ],
 };
 
-export const sampleBarGraphData : BarGraphData = {
+export const sampleBarGraphData: BarGraphData = {
   timeFilterOptions: ["7d", "14d", "30d"],
   selectedTimeFilter: "7d",
   data: {
@@ -25,22 +30,22 @@ export const sampleBarGraphData : BarGraphData = {
       {
         label: "Processed",
         data: [12, 19, 3, 5, 2, 3, 9],
-        backgroundColor: "green",
+        backgroundColor: "#5FDC8F",
       },
       {
         label: "Shipped",
         data: [2, 3, 20, 5, 1, 4, 9],
-        backgroundColor: "red",
+        backgroundColor: "#FF8E8E",
       },
       {
         label: "Returned",
         data: [3, 10, 13, 15, 22, 30, 12],
-        backgroundColor: "yellow",
+        backgroundColor: "#F2E144",
       },
       {
         label: "Cancelled",
         data: [3, 10, 13, 15, 22, 30, 12],
-        backgroundColor: "blue",
+        backgroundColor: "#82D1DB",
       },
     ],
   },
@@ -55,25 +60,25 @@ export const sampleLineGraphData: LineGraphData = {
       {
         label: "Processed",
         data: [12, 19, 3, 5, 2, 3, 9],
-        borderColor: "green",
+        borderColor: "#5FDC8F",
         fill: false,
       },
       {
         label: "Shipped",
         data: [2, 3, 20, 5, 1, 4, 9],
-        borderColor: "red",
+        borderColor: "#FF8E8E",
         fill: false,
       },
       {
         label: "Returned",
         data: [3, 10, 13, 15, 22, 30, 12],
-        borderColor: "yellow",
+        borderColor: "#F2E144",
         fill: false,
       },
       {
         label: "Cancelled",
         data: [3, 10, 13, 15, 22, 30, 12],
-        borderColor: "blue",
+        borderColor: "#82D1DB",
         fill: false,
       },
     ],
@@ -88,22 +93,22 @@ export const samplePieGraphData = {
     {
       category: "Processed",
       count: 30000,
-      color: "green",
+      color: "#54D787",
     },
     {
       category: "Shipped",
       count: 25000,
-      color: "red",
+      color: "#5E5ADB",
     },
     {
       category: "Returned",
       count: 15000,
-      color: "yellow",
+      color: "#F2E144",
     },
     {
       category: "Cancelled",
       count: 19000,
-      color: "blue",
+      color: "#FF6969",
     },
   ],
 };

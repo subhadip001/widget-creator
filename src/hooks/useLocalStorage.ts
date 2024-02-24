@@ -1,21 +1,15 @@
-import { useState } from "react";
 import { encryptData, decryptData } from "../utils/encryption";
-import { WidgetData } from "../utils/types";
+import { GraphData, SummaryData, TableData, WidgetData } from "../utils/types";
+import { useWidgetStore } from "../store/appStore";
 
-const WIDGETS_LOCAL_STORAGE_KEY = "widgets";
+const WIDGETS_LOCAL_STORAGE_KEY = "widgets-encrypted";
 
 export const useLocalStorage = () => {
-  const [widgets, setWidgets] = useState<WidgetData[]>(() => {
-    try {
-      const item = window.localStorage.getItem(WIDGETS_LOCAL_STORAGE_KEY);
-      return item ? decryptData(item) : [];
-    } catch (error) {
-      console.log(error);
-      return [];
-    }
-  });
+  const setWidgets = useWidgetStore((state) => state.setWidgets);
 
-  const saveWidgets = async (widgets: WidgetData[]) => {
+  const saveWidgets = async (
+    widgets: WidgetData<TableData | GraphData | SummaryData>[]
+  ) => {
     return new Promise<void>((resolve, reject) => {
       try {
         const encryptedData = encryptData(widgets);
@@ -29,8 +23,18 @@ export const useLocalStorage = () => {
     });
   };
 
+  const fetchWidgets = () => {
+    try {
+      const item = window.localStorage.getItem(WIDGETS_LOCAL_STORAGE_KEY);
+      const widgets = item ? decryptData(item) : [];
+      setWidgets(widgets);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
-    widgets,
+    fetchWidgets,
     saveWidgets,
   };
 };

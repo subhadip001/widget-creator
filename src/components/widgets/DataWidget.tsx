@@ -38,7 +38,7 @@ const DataWidget: React.FC<DataWidgetProps> = ({ widget }) => {
       style={{
         backgroundColor: widget.bgColor,
       }}
-      className="z-30 pt-5 pb-3 rounded-2xl shadow-card w-[15rem]"
+      className="z-30 pt-5 pb-3 rounded-2xl shadow-card w-[15rem] h-[15rem]"
     >
       <div className="flex border-b-[1px] border-[#E1E1E1]">
         {(widget.data as TableData).timeFilter.map((filter, i) => (
@@ -67,7 +67,7 @@ const DataWidget: React.FC<DataWidgetProps> = ({ widget }) => {
           <HiOutlineDotsHorizontal className="translate-y-[0.1rem] text-[#D9D9D9] " />
         </div>
       </div>
-      <div className="p-5">
+      <div className="mt-2 py-3 px-5">
         <table className="min-w-full">
           <thead>
             <tr className="">

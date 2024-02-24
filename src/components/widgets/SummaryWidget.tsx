@@ -1,5 +1,7 @@
 import React from "react";
 import { SummaryData, WidgetData } from "../../utils/types";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { IoIosArrowDown } from "react-icons/io";
 
 // The component props type uses the SummaryWidgetData interface
 interface SummaryWidgetProps {
@@ -9,29 +11,27 @@ interface SummaryWidgetProps {
 const SummaryWidget: React.FC<SummaryWidgetProps> = ({ widget }) => {
   // Render the summary widget using the data provided in the props
   return (
-    <div>
-      <h2>Summary for {widget.data.timePeriod}</h2>
-      <div>
-        <strong>Most Effective Hour:</strong>{" "}
-        {widget.data.analysis.mostEffectiveHour.hour}{" "}
-        {widget.data.analysis.mostEffectiveHour.meridiem}
-        <p>
-          Emails Opened: {widget.data.analysis.mostEffectiveHour.emailsOpened}
-        </p>
+    <section
+      style={{
+        backgroundColor: widget.bgColor,
+      }}
+      className="z-30 pt-5 pb-3 rounded-2xl shadow-card w-[15rem] h-[15rem]"
+    >
+      <div className="flex border-b-[1px] px-4 border-[#E1E1E1]">
+        <div className="text-xs py-[1px] text-[#B5B5B5] flex gap-1 items-center">
+          <span>{widget.data.timePeriod}</span>
+          <div>
+            <IoIosArrowDown />
+          </div>
+        </div>
+        <div className="ml-auto cursor-pointer text-[#BBBBBB]">
+          <HiOutlineDotsHorizontal className="translate-y-[0.1rem] text-[#D9D9D9] " />
+        </div>
       </div>
-      <div>
-        <strong>Next Best Hours:</strong>
-        <ul>
-          {widget.data.analysis.nextBestHours.map((hourData, index) => (
-            <li key={index}>
-              {hourData.hour} {hourData.meridiem}: {hourData.emailsOpened}{" "}
-              emails opened
-            </li>
-          ))}
-        </ul>
+      <div className="px-4 h-[13rem] py-3 overflow-auto">
+        <p className="opacity-65 text-xs">{widget.data.summaryText}</p>
       </div>
-      <p>{widget.data.summaryText}</p>
-    </div>
+    </section>
   );
 };
 

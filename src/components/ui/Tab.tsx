@@ -1,6 +1,6 @@
 import React from "react";
 import { TabProps } from "../../utils/types";
-import { useTabStore } from "../../store/appStore";
+import { useNewWidget, useTabStore } from "../../store/appStore";
 import { IoAdd } from "react-icons/io5";
 
 const Tab: React.FC<TabProps> = ({ active, label }) => {
@@ -8,6 +8,8 @@ const Tab: React.FC<TabProps> = ({ active, label }) => {
   const setActiveTab: (tab: string) => void = useTabStore(
     (state) => state.setActiveTab
   );
+  const newWidget = useNewWidget((state) => state.newWidget);
+  const setNewWidget = useNewWidget((state) => state.setNewWidget);
 
   const activeTabClass = activeTab === label;
 
@@ -21,6 +23,10 @@ const Tab: React.FC<TabProps> = ({ active, label }) => {
       onClick={() => {
         if (activeTab !== label) {
           setActiveTab(label);
+          setNewWidget({
+            ...newWidget,
+            category: label,
+          });
         } else {
           setActiveTab("");
         }

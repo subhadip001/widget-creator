@@ -7,9 +7,12 @@ import backPattern from "../assets/back_pattern.svg";
 import Button from "./ui/Button";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import WidgetTypeSelectorComponent from "./ui/WidgetTypeSelectorComponent";
-import { useNewWidget } from "../store/appStore";
+import { useNewWidget, useWidgetStore } from "../store/appStore";
 import DataWidget from "./widgets/DataWidget";
 import { HiMagnifyingGlassPlus, HiMagnifyingGlassMinus } from "react-icons/hi2";
+import GraphWidget from "./widgets/GraphWidget";
+import SummaryWidget from "./widgets/SummaryWidget";
+import { GraphData, SummaryData, TableData, WidgetData } from "../utils/types";
 
 interface ModalProps {
   isOpen: boolean;
@@ -19,23 +22,23 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
-  const { widgets, saveWidgets } = useLocalStorage();
+  const { fetchWidgets, saveWidgets } = useLocalStorage();
+  const widgets = useWidgetStore((state) => state.widgets);
   const newWidget = useNewWidget((state) => state.newWidget);
   const setNewWidget = useNewWidget((state) => state.setNewWidget);
+
   const [zoom, setZoom] = useState(100);
 
   const handleSave = async () => {
     try {
-      await saveWidgets([...widgets, newWidget]);
+      saveWidgets([...widgets, newWidget]);
       onClose();
+      fetchWidgets();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const viewWidgets = () => {
-    console.log(widgets);
-  };
 
   return (
     <>
@@ -135,7 +138,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                       {newWidget.name}
                     </span>
                     {newWidget.type === "data" ? (
-                      <DataWidget widget={newWidget} />
+                      <DataWidget widget={newWidget as WidgetData<TableData>} />
+                    ) : newWidget.type === "graph" ? (
+                      <GraphWidget
+                        widget={newWidget as WidgetData<GraphData>}
+                      />
+                    ) : newWidget.type === "summary" ? (
+                      <SummaryWidget
+                        widget={newWidget as WidgetData<SummaryData>}
+                      />
                     ) : null}
                   </div>
                   <div className="absolute bottom-5 left-[50%] -translate-x-[50%] flex gap-3">
@@ -202,7 +213,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                     className="w-[30%] h-[50px] flex justify-center items-center text-gray_dark bg-[#F8F8FF] border-gray_light rounded-md"
                     type="button"
                     onClick={() => {
-                      viewWidgets();
+                      
                     }}
                   >
                     <PiClockCounterClockwise className="text-xl text-[#A9A9A9]" />

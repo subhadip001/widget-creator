@@ -19,7 +19,12 @@ const Layout: React.FC = () => {
         </section>
         <Navbar className="flex w-full bg-[#ffff] z-30 md:hidden fixed bottom-0 border-t-2 border-gray_light py-2 px-4 md:gap-8" />
         {!!modalState && (
-          <Modal isOpen={modalState} onClose={() => setModalState(false)} />
+          <Modal
+            isOpen={modalState}
+            onClose={() => {
+              setModalState(false);
+            }}
+          />
         )}
       </main>
     </>

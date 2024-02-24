@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { sampleTableData } from "./sampleData";
-import { WidgetData } from "../utils/types";
+import { GraphData, SummaryData, TableData, WidgetData } from "../utils/types";
 
 interface TabStore {
   activeTab: string;
@@ -13,9 +13,16 @@ interface ModalStateStore {
   setModalState: (state: boolean) => void;
 }
 
-interface NewWidgetStore {
-  newWidget: WidgetData;
-  setNewWidget: (widget: WidgetData) => void;
+interface NewWidgetStore<T> {
+  newWidget: WidgetData<T>;
+  setNewWidget: (widget: WidgetData<T>) => void;
+}
+
+interface WidgetStore {
+  widgets: WidgetData<TableData | SummaryData | GraphData>[];
+  setWidgets: (
+    widgets: WidgetData<TableData | SummaryData | GraphData>[]
+  ) => void;
 }
 
 const useTabStore = create<TabStore, [["zustand/persist", TabStore]]>(
@@ -45,7 +52,9 @@ const useModalStateStore = create<
   )
 );
 
-const useNewWidget = create<NewWidgetStore>((set) => ({
+const useNewWidget = create<
+  NewWidgetStore<TableData | SummaryData | GraphData>
+>((set) => ({
   newWidget: {
     id: Date.now().toString(),
     name: "Reusability Scores",
@@ -57,7 +66,14 @@ const useNewWidget = create<NewWidgetStore>((set) => ({
     type: "data",
     data: sampleTableData,
   },
-  setNewWidget: (widget: WidgetData) => set(() => ({ newWidget: widget })),
+  setNewWidget: (widget: WidgetData<TableData | SummaryData | GraphData>) =>
+    set(() => ({ newWidget: widget })),
 }));
 
-export { useTabStore, useModalStateStore, useNewWidget };
+const useWidgetStore = create<WidgetStore>((set) => ({
+  widgets: [],
+  setWidgets: (widgets: WidgetData<TableData | SummaryData | GraphData>[]) =>
+    set(() => ({ widgets })),
+}));
+
+export { useTabStore, useModalStateStore, useNewWidget, useWidgetStore };

@@ -17,7 +17,7 @@ const WidgetTypeSelectorComponent: React.FC<
 > = ({ title, description, widgetType }) => {
   const newWidget = useNewWidget((state) => state.newWidget);
   const setNewWidget = useNewWidget((state) => state.setNewWidget);
-  console.log(newWidget.subType);
+
   return (
     <div
       className={`w-full text-start px-4 py-[1.1rem] rounded-md border-2 ${
