@@ -8,6 +8,9 @@ import Button from "./ui/Button";
 
 const Header: React.FC = () => {
   const activeTab: string = useTabStore((state) => state.activeTab);
+  const setActiveTab: (tab: string) => void = useTabStore(
+    (state) => state.setActiveTab
+  );
   const setModalState: (state: boolean) => void = useModalStateStore(
     (state) => state.setModalState
   );
@@ -36,6 +39,9 @@ const Header: React.FC = () => {
           type="button"
           onClick={() => {
             setModalState(true);
+            if (activeTab === "") {
+              setActiveTab("customers");
+            }
           }}
         >
           <div className="flex items-center text-sm gap-2">
