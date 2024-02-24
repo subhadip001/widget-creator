@@ -71,7 +71,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-1 z-20">
                   <span className="text-[22px] font-semibold text-brand">
                     Create Widget
                   </span>

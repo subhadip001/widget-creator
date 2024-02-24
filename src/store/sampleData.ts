@@ -1,7 +1,4 @@
-import {
-  SummaryData,
-  TableData,
-} from "../utils/types";
+import { SummaryData, TableData } from "../utils/types";
 
 export const sampleTableData: TableData = {
   timeFilter: ["7d", "14d", "30d"],
@@ -15,10 +12,10 @@ export const sampleTableData: TableData = {
     { product: "Natural", q1_23: "2%", q2_23: "11%" },
     { product: "Compost", q1_23: "7%", q2_23: "5%" },
     { product: "Reusable..", q1_23: "3%", q2_23: "4%" },
+    { product: "Natural", q1_23: "2%", q2_23: "11%" },
     { product: "Total", q1_23: "8%", q2_23: "12%" },
   ],
 };
-
 
 export const sampleSummaryData: SummaryData = {
   timePeriod: "Today",
