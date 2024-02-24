@@ -21,16 +21,19 @@ import {
   Line,
 } from "recharts";
 
-interface PieGraphWidgetProps {
-  data: PieGraphData;
-}
-
 interface BarGraphWidgetProps {
+  textColor: string;
   data: BarGraphData;
 }
 
 interface LineGraphWidgetProps {
+  textColor: string;
   data: LineGraphData;
+}
+
+interface PieGraphWidgetProps {
+  textColor: string;
+  data: PieGraphData;
 }
 
 interface GraphWidgetProps {
@@ -43,24 +46,20 @@ const GraphWidget: React.FC<GraphWidgetProps> = ({ widget }) => {
   );
   let activeFilterClass = "";
   let activeFilterBorderColor = "";
-  let theadClass = "";
-  let tFootClass = "";
+  let textColor = "";
 
   if (widget.bgColor === "#ffff") {
     activeFilterClass = "text-[#5E5ADB]";
     activeFilterBorderColor = "#5E5ADB";
-    theadClass = "text-[#5E5ADB]";
-    tFootClass = "text-[#474747]";
+    textColor = "#5E5ADB";
   } else if (widget.bgColor === "#5E5ADB") {
     activeFilterClass = "text-[#ffff]";
     activeFilterBorderColor = "#ffff";
-    theadClass = "text-[#ffff]";
-    tFootClass = "text-[#ffff]";
+    textColor = "#  ";
   } else if (widget.bgColor === "#282828") {
     activeFilterClass = "text-[#ffff]";
     activeFilterBorderColor = "#ffff";
-    theadClass = "text-[#ffff]";
-    tFootClass = "text-[#ffff]";
+    textColor = "#ffff";
   }
 
   if (widget.subType === "bar") {
@@ -98,7 +97,10 @@ const GraphWidget: React.FC<GraphWidgetProps> = ({ widget }) => {
             <HiOutlineDotsHorizontal className="translate-y-[0.1rem] text-[#D9D9D9] " />
           </div>
         </div>
-        <BarGraphWidget data={widget.data as BarGraphData} />
+        <BarGraphWidget
+          textColor={textColor}
+          data={widget.data as BarGraphData}
+        />
       </section>
     );
   } else if (widget.subType === "line") {
@@ -136,7 +138,10 @@ const GraphWidget: React.FC<GraphWidgetProps> = ({ widget }) => {
             <HiOutlineDotsHorizontal className="translate-y-[0.1rem] text-[#D9D9D9] " />
           </div>
         </div>
-        <LineGraphWidget data={widget.data as LineGraphData} />
+        <LineGraphWidget
+          textColor={textColor}
+          data={widget.data as LineGraphData}
+        />
       </section>
     );
   } else if (widget.subType === "pie") {
@@ -174,14 +179,17 @@ const GraphWidget: React.FC<GraphWidgetProps> = ({ widget }) => {
             <HiOutlineDotsHorizontal className="translate-y-[0.1rem] text-[#D9D9D9] " />
           </div>
         </div>
-        <PieGraphWidget data={widget.data as PieGraphData} />
+        <PieGraphWidget
+          textColor={textColor}
+          data={widget.data as PieGraphData}
+        />
       </section>
     );
   }
   return null;
 };
 
-const PieGraphWidget: React.FC<PieGraphWidgetProps> = ({ data }) => {
+const PieGraphWidget: React.FC<PieGraphWidgetProps> = ({ textColor, data }) => {
   const chartData = data.orderCategories.map((category) => ({
     title: category.category,
     value: category.count,
@@ -190,7 +198,6 @@ const PieGraphWidget: React.FC<PieGraphWidgetProps> = ({ data }) => {
 
   return (
     <div className="widget">
-      {/* Donut Chart */}
       <div className="relative">
         <PieChart
           data={chartData}
@@ -205,22 +212,26 @@ const PieGraphWidget: React.FC<PieGraphWidgetProps> = ({ data }) => {
           rounded={false}
         />
         <div className="absolute top-[50%] items-center left-[50%] flex flex-col -translate-x-[50%] -translate-y-[50%]">
-          <span className="text-[1.4rem] text-[#4F4F4F]">
+          <span
+            style={{
+              color: textColor,
+            }}
+            className={`text-[1.4rem]`}
+          >
             {data.totalOrders.toLocaleString()}
           </span>
           <span className="text-[0.7rem] text-[#BBBBBB]">Orders</span>
         </div>
       </div>
-      {/* Central Label */}
     </div>
   );
 };
 
 const formatYAxisTick = (tick: number) => {
-  return tick === 0 ? "0" : `${Math.round(tick / 1000)}k`;
+  return tick === 0 ? "0" : `${Math.round(tick / 1000)}K`;
 };
 
-const BarGraphWidget: React.FC<BarGraphWidgetProps> = ({ data }) => {
+const BarGraphWidget: React.FC<BarGraphWidgetProps> = ({ textColor, data }) => {
   return (
     <div className="widget flex justify-center items-center w-[14rem] h-[12rem]">
       <ResponsiveContainer width="100%" height={160}>
@@ -234,7 +245,7 @@ const BarGraphWidget: React.FC<BarGraphWidgetProps> = ({ data }) => {
             tickFormatter={formatYAxisTick}
             domain={[0, "dataMax + 10000"]}
             tick={{
-              fill: "#474747",
+              fill: textColor,
               fontSize: 11,
               strokeWidth: 0,
               stroke: "none",
@@ -254,7 +265,10 @@ const BarGraphWidget: React.FC<BarGraphWidgetProps> = ({ data }) => {
   );
 };
 
-const LineGraphWidget: React.FC<LineGraphWidgetProps> = ({ data }) => {
+const LineGraphWidget: React.FC<LineGraphWidgetProps> = ({
+  textColor,
+  data,
+}) => {
   type ChartDataPoint = {
     time: string;
     [key: string]: string | number; // This index signature allows for any string key to be used
@@ -284,7 +298,7 @@ const LineGraphWidget: React.FC<LineGraphWidgetProps> = ({ data }) => {
             tickFormatter={formatYAxisTick}
             domain={[0, "dataMax + 10000"]}
             tick={{
-              fill: "#474747",
+              fill: textColor,
               fontSize: 11,
               strokeWidth: 0,
               stroke: "none",
