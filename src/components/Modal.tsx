@@ -100,7 +100,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             <div className="flex flex-col gap-5 md:flex-row">
-              <div className="viewer md:h-[456px] relative w-full md:w-[65%]">
+              <div className="viewer md:h-[456px] bg-[#F8F8FF] relative w-full md:w-[65%]">
                 <div className="flex md:h-full overflow-y-auto items-center justify-center h-[40vh] border border-border_light rounded-md">
                   <div className="absolute z-20 p-1 right-5 top-3 flex gap-1 items-center bg-[#ffff] border border-gray_light rounded-sm text-[#7B7B7B]">
                     <span className="px-3 py-1 bg-[#EDEDED] bg-opacity-20 text-[#7B7B7B] rounded-sm border border-gray_light">

@@ -11,7 +11,7 @@ const Layout: React.FC = () => {
 
   return (
     <>
-      <main className="flex flex-col md:flex-row h-screen ">
+      <main className="flex flex-col md:flex-row h-screen overflow-hidden">
         <Navbar className="hidden w-full md:flex md:flex-col bg-[#ffff] md:w-[6%] py-8 gap-10 border-r-2 border-gray_light" />
         <section className="w-full md:w-[94%] bg-brand_light">
           <Header />

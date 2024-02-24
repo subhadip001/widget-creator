@@ -21,7 +21,9 @@ const Dashboard: React.FC = () => {
   if (widgets.length === 0) {
     return (
       <div className="h-[87vh] flex items-center justify-center">
-        <h1 className="text-2xl font-bold text-[#5e5adbb8]">No widgets available</h1>
+        <h1 className="text-2xl font-bold text-[#5e5adbb8]">
+          No widgets available
+        </h1>
       </div>
     );
   }
@@ -40,10 +42,9 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="px-4 md:px-8 bg-brand_light">
-      <section className="h-[87vh] my-2 overflow-y-auto">
-        <div className="flex gap-y-7 my-3 mx-5 flex-wrap gap-6">
-          {widgets.length !== 0 ? (
-            widgets.map((widget, index) => {
+      <section className="h-[87vh] pb-24 md:pb-0 my-5 flex md:gap-y-7 gap-y-3 mx-5 flex-wrap gap-3 md:gap-6 overflow-y-auto justify-center md:justify-normal">
+        {widgets.length !== 0
+          ? widgets.map((widget, index) => {
               if (widget.type === "data" && widget.category === activeTab) {
                 return (
                   <DataWidget
@@ -75,8 +76,7 @@ const Dashboard: React.FC = () => {
                 return null;
               }
             })
-          ) : null}
-        </div>
+          : null}
       </section>
     </div>
   );
