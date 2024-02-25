@@ -4,6 +4,14 @@ import { useWidgetStore } from "../store/appStore";
 
 const WIDGETS_LOCAL_STORAGE_KEY = "widgets-encrypted";
 
+/**
+ * Saves the provided widgets to local storage and updates the widget store state.
+ * @returns {object} An object with the fetchWidgets and saveWidgets functions.
+ * @description   - Encrypts the provided widgets before saving them to local storage.
+  - Uses the setWidgets function from the useWidgetStore hook to update the widget store state.
+  - Logs any errors that occur during the saving process.
+  - Returns an object with the fetchWidgets and saveWidgets functions.
+ */
 export const useLocalStorage = () => {
   const setWidgets = useWidgetStore((state) => state.setWidgets);
 

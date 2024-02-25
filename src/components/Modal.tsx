@@ -19,6 +19,18 @@ interface ModalProps {
   onClose: () => void;
 }
 
+/**
+ * Component for creating and managing widgets for a database glossary.
+ * @component
+ * @prop {boolean} isOpen - Determines if the widget creation modal is open or not.
+ * @prop {function} onClose - Function to close the widget creation modal.
+ * @description
+ *   - Uses local storage to fetch and save widgets.
+ *   - Uses custom hooks to access and update widget store and new widget state.
+ *   - Uses state to manage zoom level and new widget data.
+ *   - Renders a modal with options to create and customize different types of widgets.
+ */
+
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
@@ -28,6 +40,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   const setNewWidget = useNewWidget((state) => state.setNewWidget);
 
   const [zoom, setZoom] = useState(100);
+
+  // Saving the new widget to local storage and update the widget store
 
   const handleSave = async () => {
     try {

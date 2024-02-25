@@ -6,6 +6,16 @@ interface DataWidgetProps {
   widget: WidgetData<TableData>;
 }
 
+/**
+ * Displays a table widget with customizable time filters and data columns.
+ * @component
+ * @prop {Object} widget - The widget object containing all data about Table type of Widget.
+ * @description
+ *   - Uses state variable to track selected time filter.
+ *   - Applies different styles based on widget background color.
+ *   - Renders table with customizable columns and rows.
+ *   - Supports time filters and customizable data.
+ */
 const DataWidget: React.FC<DataWidgetProps> = ({ widget }) => {
   const [selectedTimeFilter, setSelectedTimeFilter] = useState(
     (widget.data as TableData).timeFilter[0]

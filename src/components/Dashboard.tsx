@@ -6,6 +6,17 @@ import GraphWidget from "./widgets/GraphWidget";
 import { useTabStore, useWidgetStore } from "../store/appStore";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
+/**
+ * Renders a section of widgets based on the active tab and available widgets.
+ * @component
+ * @prop {array} widgets - An array of widget objects.
+ * @prop {string} activeTab - The currently active tab.
+ * @description
+ *   - Uses the useWidgetStore and useTabStore hooks to access the widgets and activeTab state variables.
+ *   - Uses the fetchWidgets function from the useLocalStorage hook to fetch widgets on component mount.
+ *   - Checks if there are any widgets available and renders a message if not.
+ *   - Checks if the active tab has any widgets available and renders a message if not.
+ */
 const Dashboard: React.FC = () => {
   const widgets = useWidgetStore((state) => state.widgets);
   const activeTab = useTabStore((state) => state.activeTab);

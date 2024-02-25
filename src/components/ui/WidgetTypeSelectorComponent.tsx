@@ -16,6 +16,19 @@ import {
   getSamplePieGraphData,
 } from "../../utils/randomDataGen";
 
+/**
+ * Component for displaying a widget with customizable title, description, and widget type.
+ * @component
+ * @prop {string} title - The title of the widget.
+ * @prop {string} description - The description of the widget.
+ * @prop {string} widgetType - The type of widget to be displayed (e.g. graph, summary, table).
+ * @description
+ *   - Uses state variables to track the current widget being displayed and its properties.
+ *   - Renders a customizable widget with a title, description, and widget type.
+ *   - Allows for selection of different graph subtypes (bar, line, pie) for the graph widget type.
+ *   - Uses sample data for each widget type to display as an example.
+ */
+
 const WidgetTypeSelectorComponent: React.FC<
   WidgetTypeSelectorComponentProps
 > = ({ title, description, widgetType }) => {

@@ -52,6 +52,17 @@ const useModalStateStore = create<
   )
 );
 
+/**
+ * Creates a new widget with the given properties and sets it as the new widget in the state.
+ * @param {WidgetData} widget - Object containing the properties of the new widget.
+ * @returns {void} No return value.
+ * @description
+ *   - The new widget will have a unique id generated using the current date and time.
+ *   - The category of the new widget will be set to "customers".
+ *   - The background color of the new widget will be set to "#ffff".
+ *   - The dimension of the new widget will be set to "1x1".
+ */
+
 const useNewWidget = create<
   NewWidgetStore<TableData | SummaryData | GraphData>
 >((set) => ({

@@ -7,6 +7,16 @@ interface SummaryWidgetProps {
   widget: WidgetData<SummaryData>;
 }
 
+/**
+ * Displays a widget with customizable background color, time period, and summary text.
+ * @component
+ * @prop {object} widget - An object containing the time period and summary text for the widget.
+ * @description
+ *   - The widget's background color and text color will change depending on the bgColor prop.
+ *   - The time period and summary text can be customized through the data prop.
+ *   - The widget has a dropdown menu for changing the time period.
+ *   - The widget also has a menu for additional options.
+ */
 const SummaryWidget: React.FC<SummaryWidgetProps> = ({ widget }) => {
   let textColor = "";
   let headColor = "";

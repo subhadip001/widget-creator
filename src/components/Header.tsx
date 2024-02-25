@@ -6,6 +6,18 @@ import { IoSettingsOutline, IoAdd } from "react-icons/io5";
 import { useModalStateStore, useTabStore } from "../store/appStore";
 import Button from "./ui/Button";
 
+/**
+ * Renders a header component with tabs and buttons for navigating and adding widgets.
+ * @component
+ * @prop {string} activeTab - The currently active tab.
+ * @prop {function} setActiveTab - Function to set the active tab.
+ * @prop {function} setModalState - Function to set the state of the modal.
+ * @description
+ *   - Uses custom hooks to access and update state variables.
+ *   - Renders a header with tabs and buttons for navigation and adding widgets.
+ *   - Includes a section for the left side with a home icon and tabs for overview, customers, products, and settings.
+ *   - Includes a section for the right side with a button for adding widgets and a button for settings.
+ */
 const Header: React.FC = () => {
   const activeTab: string = useTabStore((state) => state.activeTab);
   const setActiveTab: (tab: string) => void = useTabStore(

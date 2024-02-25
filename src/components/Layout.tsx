@@ -5,6 +5,15 @@ import Navbar from "./Navbar";
 import { useModalStateStore } from "../store/appStore";
 import Modal from "./Modal";
 
+/**
+ * Main component for the application's dashboard page
+ * @component
+ * @prop {boolean} modalState - Indicates whether the modal is open or not
+ * @description
+ *   - Uses state hook to store and retrieve modal state
+ *   - Renders a Navbar component and a section with a Header and Dashboard component
+ *   - Conditionally renders a Modal component if modalState is true
+ */
 const Layout: React.FC = () => {
   const modalState = useModalStateStore((state) => state.modalState);
   const setModalState = useModalStateStore((state) => state.setModalState);

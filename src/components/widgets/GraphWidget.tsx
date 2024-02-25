@@ -40,6 +40,15 @@ interface GraphWidgetProps {
   widget: WidgetData<GraphData>;
 }
 
+/**
+ * Renders a graph widget with different subtypes (bar, line, pie)
+ * @component
+ * @description
+ *   - Uses state variable to track selected time filter
+ *   - Renders different graph widgets based on subtype and data provided
+ *   - Handles styling and active filter logic
+ *   - Uses useState hook for selectedTimeFilter
+ */
 const GraphWidget: React.FC<GraphWidgetProps> = ({ widget }) => {
   const [selectedTimeFilter, setSelectedTimeFilter] = useState(
     (widget.data as GraphData).timeFilterOptions[0]
@@ -189,6 +198,17 @@ const GraphWidget: React.FC<GraphWidgetProps> = ({ widget }) => {
   return null;
 };
 
+/**
+ * A pie chart widget that displays the total number of orders and their respective categories.
+ * @component
+ * @prop {string} textColor - The color of the total orders text.
+ * @prop {object} data - An object containing the order categories and their respective counts and colors.
+ * @description
+ *   - The widget uses the react-minimal-pie-chart library to render the pie chart.
+ *   - The chartData variable is created by mapping through the orderCategories data and formatting it to fit the library's data structure.
+ *   - The widget also displays the total number of orders in the center of the chart.
+ *   - The total number of orders is formatted using the toLocaleString() method.
+ */
 const PieGraphWidget: React.FC<PieGraphWidgetProps> = ({ textColor, data }) => {
   const chartData = data.orderCategories.map((category) => ({
     title: category.category,
@@ -231,6 +251,17 @@ const formatYAxisTick = (tick: number) => {
   return tick === 0 ? "0" : `${Math.round(tick / 1000)}K`;
 };
 
+/**
+ * A bar chart widget that displays data in a visually appealing way.
+ * @component
+ * @prop {string} textColor - The color of the tick labels on the Y axis.
+ * @prop {object} data - The data to be displayed on the chart.
+ * @description
+ *   - The chart uses a responsive container to adjust to different screen sizes.
+ *   - The Y axis tick labels are formatted using the provided function.
+ *   - The chart uses a custom tooltip to display data values.
+ *   - The bars are colored based on the category they represent.
+ */
 const BarGraphWidget: React.FC<BarGraphWidgetProps> = ({ textColor, data }) => {
   return (
     <div className="widget flex justify-center items-center w-[14rem] h-[12rem]">
@@ -265,6 +296,17 @@ const BarGraphWidget: React.FC<BarGraphWidgetProps> = ({ textColor, data }) => {
   );
 };
 
+/**
+ * A responsive line chart component that displays data points over time.
+ * @component
+ * @prop {string} textColor - The color of the text on the chart.
+ * @prop {object} data - An object containing the data series and their corresponding data points.
+ * @description
+ *   - The chartData variable is created by mapping over the data series and combining their data points into one array.
+ *   - The chartData is then used as the data prop for the LineChart component.
+ *   - The YAxis component uses a custom tick formatter function and a domain that adds 10,000 to the maximum data value.
+ *   - The Line components are dynamically rendered based on the data series provided.
+ */
 const LineGraphWidget: React.FC<LineGraphWidgetProps> = ({
   textColor,
   data,

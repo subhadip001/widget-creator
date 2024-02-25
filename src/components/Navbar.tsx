@@ -10,6 +10,16 @@ type NavbarProps = {
   className?: string;
 };
 
+/**
+ * Component for displaying a navigation bar with icons and user profile picture.
+ * @component
+ * @prop {string} className - The class name for styling the component.
+ * @description
+ *   - Renders a navigation bar with icons and user profile picture.
+ *   - Accepts a className prop for custom styling.
+ *   - Uses React Hooks for managing state.
+ *   - Uses third-party icons from React Icons library.
+ */
 const Navbar: React.FC<NavbarProps> = ({ className }) => {
   return (
     <div className={`${className} items-center`}>
