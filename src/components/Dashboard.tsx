@@ -42,7 +42,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="px-4 md:px-8 bg-brand_light">
-      <section className="h-[87vh] pb-24 pt-3 md:px-4 md:pb-0 my-5 flex md:gap-y-7 gap-y-3 flex-wrap gap-6 overflow-y-auto justify-center md:justify-normal">
+      <section className="h-[87vh] pb-24 pt-3 md:px-4 md:pb-0 my-5 flex gap-y-3 flex-wrap gap-6 overflow-y-auto justify-center md:justify-normal">
         {widgets.length !== 0
           ? widgets.map((widget, index) => {
               if (widget.type === "data" && widget.category === activeTab) {
